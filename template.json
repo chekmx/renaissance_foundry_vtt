@@ -1,0 +1,109 @@
+{
+  "Actor": {
+    "types": ["character"],
+    "templates": {
+      "base": {
+        "health": {
+          "value": 10,
+          "min": 0,
+          "max": 10
+        },
+        "power": {
+          "value": 5,
+          "min": 0,
+          "max": 5
+        }
+      }
+    },
+    "character": {
+      "templates": ["base"],
+      "biography": "",
+      "nationality": "",
+      "age": 0,
+      "homeland": "",
+      "gender": "",
+      "social": "",
+      "profession": "",
+      "family" : "",
+      "connections": "",
+      "politics": "",
+      "attributes": {
+        "level": {
+          "value": 1
+        }
+      },
+      "abilities": {
+        "str": {
+          "fullname": "Strength",
+          "value": 10
+        },
+        "con": {
+          "fullname": "Constitution",
+          "value": 10
+        },
+        "siz": {
+          "fullname": "Size",
+          "value": 10
+        },  
+        "int": {
+          "fullname": "Intelligence",
+          "value": 10
+        },
+        "pow": {
+          "fullname": "Power",
+          "value": 10
+        },
+        "dex": {
+          "fullname": "Dexterity",
+          "value": 10
+        },
+        "cha": {
+          "fullname": "Charisma",
+          "value": 10
+        }
+      }
+    }
+  },
+  "Item": {
+    "types": ["item", "skill", "spell", "fatigue", "weapon"],
+    "templates": {
+      "base": {
+        "description": ""
+      }
+    },
+    "item": {
+      "templates": ["base"],
+      "quantity": 1,
+      "weight": 0
+    },
+    "skill": {
+      "templates": ["base"],
+      "base1": "",
+      "base2": "",
+      "value": "0"
+    },
+    "spell": {
+      "templates": ["base"],
+      "spellLevel": 1
+    },
+    "fatigue": {
+      "templates": ["base"],
+      "level": "Fresh",
+      "skill": 0,
+      "movement": 0,
+      "order": "0",
+      "other": ""
+    },
+    "weapon": {
+      "templates": ["base"],
+      "name": "",
+      "skill": 0,
+      "size": "",
+      "damage": "",
+      "notes": "",
+      "range": "",
+      "load": "",
+      "encumberance": ""
+    }
+  }
+}
