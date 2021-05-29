@@ -13,12 +13,9 @@ export class BoilerplateItem extends Item {
     const itemData = this.data;
     const actorData = this.actor ? this.actor.data : {};
     const data = itemData.data;
-
-    console.log(itemData.type)
     if(itemData.type === "armour"){
       data.gunPoints = Math.floor(data.points / 2);
     }
-    console.log(data.gunPoints);
   }
 
   /**

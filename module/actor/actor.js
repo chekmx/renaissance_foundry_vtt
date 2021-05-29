@@ -32,14 +32,25 @@ export class BoilerplateActor extends Actor {
       // Calculate the modifier using d20 rules.
       ability.mod = Math.floor((ability.value - 10) / 2);
     }
-    data.damageModifier = data.abilities.str.value + data.abilities.siz.value //this._calculateDamageModifier(actorData)
+ 
+    var damgeModSizeAndStr = data.abilities.str.value + data.abilities.siz.value
+    if (damgeModSizeAndStr <= 10){
+      data.damageModifier = "-1d6"
+    } else if (damgeModSizeAndStr <= 15) {
+      data.damageModifier = "-1d4"
+    } else if (damgeModSizeAndStr <= 25) {
+      data.damageModifier = ""
+    }  else if (damgeModSizeAndStr <= 30) {
+      data.damageModifier = "+1d4"
+    }  else if (damgeModSizeAndStr > 30) {
+      var numberOfD6s = Math.ceil((damgeModSizeAndStr - 30)/15) 
+      data.damageModifier = `+${numberOfD6s}d6`
+    } else {
+      data.damageModifier = data.abilities.str.value + data.abilities.siz.value //this._calculateDamageModifier(actorData)
+    }
+      
     data.hitPoints = Math.ceil((data.abilities.con.value + data.abilities.siz.value) / 2)
     data.majorWoundLevel = Math.ceil(data.hitPoints / 2)
-    console.log(data.majorWoundLevel)
     data.movementRate = 15
   }
-
-  _calculateDamageModifier(actorData) {
-    return data.abilities.str.value + data.abilities.siz.value
-  } 
 }

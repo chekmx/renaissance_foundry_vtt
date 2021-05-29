@@ -44,11 +44,11 @@
                 </div>
                 <div class="ability flexrow flex-group-center">
                   <label>Combat Order:</label>
-                  <label>{{data.abilities.dex.value}}</label>
+                  <label>{{actor.combatOrder}}</label>
                 </div>
                 <div class="ability flexrow flex-group-center">
                   <label>Spellcasting Order:</label>
-                  <label>{{data.abilities.int.value}}</label>
+                  <label>{{actor.spellOrder}}</label>
                 </div>
                 <div class="ability flexrow flex-group-center">
                   <label>Movement:</label>
@@ -174,14 +174,14 @@
                   <div class="item-name">Base</div>
                   <div class="item-name">Value</div>
                   <div class="item-controls">
-                    <a class="item-control item-create" title="Create item" data-type="skill"><i class="fas fa-plus"></i> Add item</a>
+                    <a class="item-control item-create" title="Create item" data-type="skill"><i class="fas fa-plus"></i> Add</a>
                   </div>
                 </li>
             {{#each actor.skills as |skill id|}}
                 <li class="item flexrow" data-item-id="{{skill._id}}">
                     <div class="item-image rollable" data-roll="d100+{{@data.value}}" data-label="{{@skill.name}}"><img src="{{skill.img}}" title="{{skill.name}}" width="24" height="24"/></div>
                     <h4 class="item-name">{{skill.name}}</h4>
-                    <div class="item-base"><label>{{data.base1}}+{{data.base2}}</label></div>
+                    <div class="item-base"><label>{{data.base1}} & {{data.base2}}</label></div>
                     <div class="item-base"><label>{{data.value}}</label></div>
                     <div class="item-controls">
                         <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
@@ -204,7 +204,7 @@
                     <li class="item flexrow item-header">
                       <div class="item-name">Level {{spellLevel}} Spells</div>
                       <div class="item-controls">
-                        <a class="item-control item-create" title="Create item" data-type="spell" data-spell-level="{{spellLevel}}"><i class="fas fa-plus"></i> Add LVL {{spellLevel}}</a>
+                        <a class="item-control item-create" title="Create item" data-type="spell" data-spell-level="{{spellLevel}}"><i class="fas fa-plus"></i> Add</a>
                       </div>
                     </li>
                     {{#each spells as |item id|}}

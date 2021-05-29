@@ -88,8 +88,9 @@ export class BoilerplateActorSheet extends ActorSheet {
     actorData.currentArmour = actorData.gear.filter( function (e) {
       return e.type === "armour"
     })[0];
-    console.log("Current Armour")
-    console.log(actorData.currentArmour)
+
+    actorData.combatOrder = actorData.data.abilities.dex.value - actorData.currentArmour.data.points
+    actorData.spellOrder = actorData.data.abilities.int.value - actorData.currentArmour.data.points
   }
 
   /* -------------------------------------------- */
