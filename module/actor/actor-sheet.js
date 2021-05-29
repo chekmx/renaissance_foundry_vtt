@@ -97,7 +97,7 @@ export class BoilerplateActorSheet extends ActorSheet {
       actorData.spellOrder = actorData.data.abilities.int.value ;
     }
     actorData.data.combatOrder = actorData.combatOrder;
-    console.log(actorData);
+    console.log(this);
   }
 
   /* -------------------------------------------- */
