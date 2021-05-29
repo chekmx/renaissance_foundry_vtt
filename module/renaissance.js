@@ -3,6 +3,7 @@ import { BoilerplateActor } from "./actor/actor.js";
 import { BoilerplateActorSheet } from "./actor/actor-sheet.js";
 import { BoilerplateItem } from "./item/item.js";
 import { BoilerplateItemSheet } from "./item/item-sheet.js";
+//import { _getInitiativeFormula } from "./module/combat.js";
 
 Hooks.once('init', async function() {
 
@@ -20,10 +21,13 @@ Hooks.once('init', async function() {
     formula: "@combatOrder",
     decimals: 2
   };
+  //Combat.prototype._getInitiativeFormula = _getInitiativeFormula;
+
 
   // Define custom Entity classes
   CONFIG.Actor.entityClass = BoilerplateActor;
   CONFIG.Item.entityClass = BoilerplateItem;
+  CONFIG.time.roundTime = 5;
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);

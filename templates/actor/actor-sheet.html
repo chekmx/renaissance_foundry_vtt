@@ -42,18 +42,23 @@
                   <label>Damage Modifier:</label>
                   <label>{{data.damageModifier}}</label>
                 </div>
-                <div>
-                  <div class="ability flexrow flex-group-center">
-                    <label>Combat Order:</label>
-                    <label>{{actor.combatOrder}}</label>
-                  </div>
-                  <div class="ability flexrow flex-group-center">
-                    <label>Spellcasting Order:</label>
-                    <label>{{actor.spellOrder}}</label>
-                  </div>
-                  <div>
-                    <input type="text" name="data.combatOrder" value="{{data.combatOrder}}" data-dtype="Number"/>
-                  </div>
+                <div class="ability flexrow flex-group-center">
+                  <label>Order</label>
+                </div>
+                <div class="ability flexrow flex-group-center">
+
+                  <label>Combat:</label>
+                  <label>{{actor.combatOrder}}</label>
+                </div>
+                <div class="ability flexrow flex-group-center">
+                  <label>Spell:</label>
+                  <label>{{actor.spellOrder}}</label>
+                </div>
+                <div div class="ability flexrow flex-group-center">
+                  <select name="orderType">
+                    {{selectOptions data.orderTypes selected=data.orderType localize=false}}
+                  </select>
+                  <input type="text" name="data.combatOrder" value="{{data.combatOrder}}" data-dtype="Number"/>
                 </div>
                 <div class="ability flexrow flex-group-center">
                   <label>Movement:</label>

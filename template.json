@@ -28,6 +28,8 @@
       "connections": "",
       "politics": "",
       "combatOrder": "1",
+      "orderTypes": ["Combat", "Spell"],
+      "orderType": "Combat",
       "attributes": {
         "level": {
           "value": 1

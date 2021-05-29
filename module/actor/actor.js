@@ -52,6 +52,5 @@ export class BoilerplateActor extends Actor {
     data.hitPoints = Math.ceil((data.abilities.con.value + data.abilities.siz.value) / 2);
     data.majorWoundLevel = Math.ceil(data.hitPoints / 2);
     data.movementRate = 15;
-    console.log(this);
   }
 }
