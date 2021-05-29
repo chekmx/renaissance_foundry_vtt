@@ -89,8 +89,15 @@ export class BoilerplateActorSheet extends ActorSheet {
       return e.type === "armour"
     })[0];
 
-    actorData.combatOrder = actorData.data.abilities.dex.value - actorData.currentArmour.data.points
-    actorData.spellOrder = actorData.data.abilities.int.value - actorData.currentArmour.data.points
+    if(actorData.currentArmour){
+      actorData.combatOrder = actorData.data.abilities.dex.value - actorData.currentArmour.data.points;
+      actorData.spellOrder = actorData.data.abilities.int.value - actorData.currentArmour.data.points;
+    } else {
+      actorData.combatOrder = actorData.data.abilities.dex.value;
+      actorData.spellOrder = actorData.data.abilities.int.value ;
+    }
+    actorData.data.combatOrder = actorData.combatOrder;
+    console.log(actorData);
   }
 
   /* -------------------------------------------- */

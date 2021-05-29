@@ -35,22 +35,22 @@ export class BoilerplateActor extends Actor {
  
     var damgeModSizeAndStr = data.abilities.str.value + data.abilities.siz.value
     if (damgeModSizeAndStr <= 10){
-      data.damageModifier = "-1d6"
+      data.damageModifier = "-1d6";
     } else if (damgeModSizeAndStr <= 15) {
-      data.damageModifier = "-1d4"
+      data.damageModifier = "-1d4";
     } else if (damgeModSizeAndStr <= 25) {
-      data.damageModifier = ""
+      data.damageModifier = "";
     }  else if (damgeModSizeAndStr <= 30) {
-      data.damageModifier = "+1d4"
+      data.damageModifier = "+1d4";
     }  else if (damgeModSizeAndStr > 30) {
       var numberOfD6s = Math.ceil((damgeModSizeAndStr - 30)/15) 
-      data.damageModifier = `+${numberOfD6s}d6`
+      data.damageModifier = `+${numberOfD6s}d6`;
     } else {
-      data.damageModifier = data.abilities.str.value + data.abilities.siz.value //this._calculateDamageModifier(actorData)
+      data.damageModifier = data.abilities.str.value + data.abilities.siz.value //this._calculateDamageModifier(actorData);
     }
       
-    data.hitPoints = Math.ceil((data.abilities.con.value + data.abilities.siz.value) / 2)
-    data.majorWoundLevel = Math.ceil(data.hitPoints / 2)
-    data.movementRate = 15
+    data.hitPoints = Math.ceil((data.abilities.con.value + data.abilities.siz.value) / 2);
+    data.majorWoundLevel = Math.ceil(data.hitPoints / 2);
+    data.movementRate = 15;
   }
 }
