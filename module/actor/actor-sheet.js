@@ -97,11 +97,7 @@ export class BoilerplateActorSheet extends ActorSheet {
       actorData.spellOrder = actorData.data.abilities.int.value ;
     }
     actorData.data.combatOrder = actorData.combatOrder;
-    console.log(actorData.data.orderType);
-
-    let groupName = "importantChoice";
-    let choices = {a: "Choice A", b: "Choice B"};
-    let chosen = "a";
+    console.log(actorData);
   }
 
   /* -------------------------------------------- */

@@ -29,7 +29,7 @@
       "politics": "",
       "combatOrder": "1",
       "orderTypes": ["Combat", "Spell"],
-      "orderType": "Combat",
+      "orderType": "",
       "attributes": {
         "level": {
           "value": 1
