@@ -65,7 +65,7 @@ export class BoilerplateActorSheet extends ActorSheet {
       let item = i.data;
       i.img = i.img || DEFAULT_TOKEN;
       // Append to gear.
-      if (i.type === 'item') {
+      if (i.type === 'item'  || i.type === 'armour'  || i.type === 'weapon') {
         gear.push(i);
       }
       // Append to skills.
@@ -84,6 +84,12 @@ export class BoilerplateActorSheet extends ActorSheet {
     actorData.gear = gear;
     actorData.skills = skills;
     actorData.spells = spells;
+
+    actorData.currentArmour = actorData.gear.filter( function (e) {
+      return e.type === "armour"
+    })[0];
+    console.log("Current Armour")
+    console.log(actorData.currentArmour)
   }
 
   /* -------------------------------------------- */

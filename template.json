@@ -65,7 +65,7 @@
     }
   },
   "Item": {
-    "types": ["item", "skill", "spell", "fatigue", "weapon"],
+    "types": ["item", "skill", "spell", "fatigue", "weapon", "armour"],
     "templates": {
       "base": {
         "description": ""
@@ -86,6 +86,12 @@
       "templates": ["base"],
       "spellLevel": 1
     },
+    "armour" :{
+      "templates": ["item"],
+      "type": "None",
+      "points": 0,
+      "gunPoints": 0
+    },
     "fatigue": {
       "templates": ["base"],
       "level": "Fresh",
@@ -95,8 +101,7 @@
       "other": ""
     },
     "weapon": {
-      "templates": ["base"],
-      "name": "",
+      "templates": ["item"],
       "skill": 0,
       "size": "",
       "damage": "",
