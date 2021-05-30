@@ -31,10 +31,27 @@ export class BoilerplateItem extends Item {
     const itemData = item.data;
 
     let roll = new Roll('1d100', actorData);
-    let label = `Rolling ${item.name}`;
-    roll.roll().toMessage({
-      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-      flavor: label
-    });
+    roll.evaluate();  
+    console.log(item);
+    // let label = `Rolling ${item.name}`;
+    // roll.roll().toMessage({
+    //   speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+    //   flavor: label
+    // });
+
+    //TO DO: Handle skills > 100.  check if auto fail for 95-99 
+    let successDisplay = roll.result == 100 ? "FUMBLE" : roll.result <= item.data.value / 10 ? "CRITICAL" : roll.result <= item.data.value ? "SUCCESS" : "FAIL"
+    
+    let chatData = {
+      type: CHAT_MESSAGE_TYPES.ROLL,
+      user: game.user._id,
+      speaker: ChatMessage.getSpeaker(),
+      roll: roll,
+      rollMode: game.settings.get("core", "rollMode"),
+      content:  `<p><b>${successDisplay}</b><br>  
+                 Against Target <b>${item.data.value}</b>
+                 with a roll of <b>${roll.result}</b></p>`
+      };
+      ChatMessage.create(chatData);
   }
 }
