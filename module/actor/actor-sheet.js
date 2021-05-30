@@ -89,6 +89,10 @@ export class BoilerplateActorSheet extends ActorSheet {
       return e.type === "armour"
     })[0];
 
+    actorData.weapons = actorData.gear.filter( function (e) {
+      return e.type === "weapon"
+    });
+
     if(actorData.currentArmour){
       actorData.combatOrder = actorData.data.abilities.dex.value - actorData.currentArmour.data.points;
       actorData.spellOrder = actorData.data.abilities.int.value - actorData.currentArmour.data.points;
