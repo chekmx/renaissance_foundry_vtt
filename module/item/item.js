@@ -30,7 +30,7 @@ export class BoilerplateItem extends Item {
     const actorData = this.actor ? this.actor.data.data : {};
     const itemData = item.data;
 
-    let roll = new Roll('d20+@abilities.str.mod', actorData);
+    let roll = new Roll('1d100', actorData);
     let label = `Rolling ${item.name}`;
     roll.roll().toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),

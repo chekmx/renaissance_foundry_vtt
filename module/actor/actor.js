@@ -53,4 +53,9 @@ export class BoilerplateActor extends Actor {
     data.majorWoundLevel = Math.ceil(data.hitPoints / 2);
     data.movementRate = 15;
   }
+
+  async testMethod(){
+    console.log("testMethod");
+    return null;
+  }
 }

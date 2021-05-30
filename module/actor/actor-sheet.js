@@ -98,6 +98,7 @@ export class BoilerplateActorSheet extends ActorSheet {
     }
     actorData.data.combatOrder = actorData.combatOrder;
     console.log(actorData);
+    this.actor.testMethod();
   }
 
   /* -------------------------------------------- */
@@ -173,18 +174,11 @@ export class BoilerplateActorSheet extends ActorSheet {
    * @private
    */
   _onRoll(event) {
-    event.preventDefault();
-    const element = event.currentTarget;
-    const dataset = element.dataset;
 
-    if (dataset.roll) {
-      let roll = new Roll(dataset.roll, this.actor.data.data);
-      let label = dataset.label ? `Rolling ${dataset.label}` : '';
-      roll.roll().toMessage({
-        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        flavor: label
-      });
-    }
+    event.preventDefault();
+    const itemId = event.currentTarget.closest(".item").dataset.itemId;
+    const item = this.actor.getOwnedItem(itemId);
+    return item.roll();
   }
 
 }
