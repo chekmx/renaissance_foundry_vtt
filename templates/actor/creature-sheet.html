@@ -46,8 +46,38 @@
                   <label>Order</label>
                 </div>
               </div>
+              <div class="skills _grid">
+                {{!-- Owned Skills Tab --}}
+                <div class="resource flex-group-center">
+                  <ol class="items-list">
+                      <li class="item flexrow item-header">
+                        <div class="item-image"></div>
+                        <div class="item-name">Name</div>
+                        <div class="item-name">Value</div>
+                        <div class="item-controls">
+                          <a class="item-control item-create" title="Create item" data-type="skill"><i class="fas fa-plus"></i> Add</a>
+                        </div>
+                      </li>
+                  {{#each actor.skills as |skill id|}}
+                      <li class="item flexrow" data-item-id="{{skill._id}}">
+                          <div class="item-image rollable" data-roll="d100+{{@data.value}}" data-label="{{@skill.name}}"><img src="{{skill.img}}" title="{{skill.name}}" width="24" height="24"/></div>
+                          <h4 class="item-name">{{skill.name}}</h4>
+                          <div class="item-base"><label>{{data.value}}</label></div>
+                          <div class="item-controls">
+                              <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                              <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                          </div>
+                      </li>
+                  {{/each}}
+                  </ol>
+                </div>
             </div>
+            <div class="resource flex-group-center">
+              next bit
+            </div>
+          </div>
         </div>
     </header>    
+    
 </form>
 

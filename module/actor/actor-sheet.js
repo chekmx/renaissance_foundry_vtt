@@ -8,9 +8,8 @@ export class BoilerplateActorSheet extends ActorSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["renaissance", "sheet", "actor"],
-      //template: "systems/renaissance/templates/actor/actor-sheet.html",
-      width: 600,
-      height: 600,
+      width: 1200,
+      height: 1000,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
     });
   }
@@ -40,10 +39,8 @@ export class BoilerplateActorSheet extends ActorSheet {
       for (let attr of Object.values(data.data.attributes)) {
         attr.isCheckbox = attr.dtype === "Boolean";
       }
-
-      this._prepareCharacterItems(data);
     }
-
+    this._prepareCharacterItems(data);
     return data;
   }
 
