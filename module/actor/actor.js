@@ -54,8 +54,7 @@ export class BoilerplateActor extends Actor {
     data.movementRate = 15;
   }
 
-  async testMethod(combatOrder){
-    this.data.data.combatOrder = combatOrder;
-    console.log(this.data);
+  async testMethod(){
+    console.log("Test Method");
   }
 }
