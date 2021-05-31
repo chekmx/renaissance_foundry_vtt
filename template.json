@@ -68,7 +68,7 @@
     }
   },
   "Item": {
-    "types": ["item", "skill", "spell", "fatigue", "weapon", "armour"],
+    "types": ["item", "skill", "spell", "fatigue", "weapon", "armour", "faction"],
     "templates": {
       "base": {
         "description": ""
@@ -114,6 +114,12 @@
       "range": "",
       "load": "",
       "encumberance": ""
+    },
+    "faction": {
+      "allies" :[],
+      "enemies": [],
+      "zeal" : 0,
+      "beliefs" : ""
     }
   }
 }

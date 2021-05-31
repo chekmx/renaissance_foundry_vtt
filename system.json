@@ -10,7 +10,15 @@
   "esmodules": ["module/renaissance.js"],
   "styles": ["css/renaissance.css"],
   "scripts": [],
-  "packs": [],
+  "packs": [
+    {
+      "name": "commmonSkills",
+      "label": "Commons Skills",
+      "system": "renaissance",
+      "path": "./packs/skills.db",
+      "entity": "Item"
+    }
+  ],
   "languages": [
     {
       "lang": "en",
