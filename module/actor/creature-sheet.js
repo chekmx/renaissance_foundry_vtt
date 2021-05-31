@@ -2,28 +2,29 @@
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
  */
-export class BoilerplateActorSheet extends ActorSheet {
+export class RenaissanceCreatureSheet extends ActorSheet {
 
   /** @override */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      classes: ["renaissance", "sheet", "actor"],
+      classes: ["renaissance", "sheet", "actor", "creature"],
+      template: "systems/renaissance/templates/actor/creature-sheet.html",
       width: 1200,
-      height: 1000,
+      height: 500,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
     });
   }
 
-  /** @override */
-  get template() {
-    const path = "systems/renaissance/templates/actor";
-    // Return a single sheet for all item types.
-    // return `${path}/item-sheet.html`;
+  // /** @override */
+  // get template() {
+  //   const path = "systems/renaissance/templates/actor";
+  //   // Return a single sheet for all item types.
+  //   // return `${path}/item-sheet.html`;
 
-    // Alternatively, you could use the following return statement to do a
-    // unique item sheet by type, like `weapon-sheet.html`.
-    return `${path}/${this.actor.data.type}-sheet.html`;
-  }
+  //   // Alternatively, you could use the following return statement to do a
+  //   // unique item sheet by type, like `weapon-sheet.html`.
+  //   return `${path}/${this.actor.data.type}-sheet.html`;
+  // }
 
   /* -------------------------------------------- */
 
@@ -55,20 +56,7 @@ export class BoilerplateActorSheet extends ActorSheet {
     const actorData = sheetData.actor;
 
     // Initialize containers.
-    const gear = [];
     const skills = [];
-    const spells = {
-      0: [],
-      1: [],
-      2: [],
-      3: [],
-      4: [],
-      5: [],
-      6: [],
-      7: [],
-      8: [],
-      9: []
-    };
 
     // Iterate through items, allocating to containers
     // let totalWeight = 0;
@@ -83,37 +71,14 @@ export class BoilerplateActorSheet extends ActorSheet {
       else if (i.type === 'skill') {
         skills.push(i);
       }
-      // Append to spells.
-      else if (i.type === 'spell') {
-        if (i.data.spellLevel != undefined) {
-          spells[i.data.spellLevel].push(i);
-        }
-      }
     }
 
     // Assign and return
-    actorData.gear = gear;
     actorData.skills = skills;
-    actorData.spells = spells;
 
-    actorData.currentArmour = actorData.gear.filter( function (e) {
-      return e.type === "armour"
-    })[0];
-
-    actorData.weapons = actorData.gear.filter( function (e) {
-      return e.type === "weapon"
-    });
-
-    if(actorData.currentArmour){
-      actorData.combatOrder = actorData.data.abilities.dex.value - actorData.currentArmour.data.points;
-      actorData.spellOrder = actorData.data.abilities.int.value - actorData.currentArmour.data.points;
-    } else {
-      actorData.combatOrder = actorData.data.abilities.dex.value;
-      actorData.spellOrder = actorData.data.abilities.int.value ;
-    }
-    actorData.data.combatOrder = actorData.combatOrder;
+    actorData.data.combatOrder = actorData.data.abilities.dex.value;
     console.log(actorData);
-    this.actor.testMethod();
+    this.actor.testMethod(actorData.data.combatOrder);
   }
 
   /* -------------------------------------------- */

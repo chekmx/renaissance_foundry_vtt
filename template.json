@@ -3,6 +3,7 @@
     "types": ["character", "creature"],
     "templates": {
       "base": {
+        "combatOrder": "1",
         "health": {
           "value": 10,
           "min": 0,
@@ -57,7 +58,6 @@
       "family" : "",
       "connections": "",
       "politics": "",
-      "combatOrder": "1",
       "orderTypes": ["Combat", "Spell"],
       "orderType": "",
       "attributes": {

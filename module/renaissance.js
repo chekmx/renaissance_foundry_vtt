@@ -1,6 +1,7 @@
 // Import Modules
 import { BoilerplateActor } from "./actor/actor.js";
-import { BoilerplateActorSheet } from "./actor/actor-sheet.js";
+import { RenaissanceCharacterSheet } from "./actor/character-sheet.js";
+import { RenaissanceCreatureSheet } from "./actor/creature-sheet.js"
 import { BoilerplateItem } from "./item/item.js";
 import { BoilerplateItemSheet } from "./item/item-sheet.js";
 //import { _getInitiativeFormula } from "./module/combat.js";
@@ -31,7 +32,8 @@ Hooks.once('init', async function() {
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("renaissance", BoilerplateActorSheet, { makeDefault: true });
+  Actors.registerSheet("renaissance", RenaissanceCharacterSheet, { types: ['character'], makeDefault: true });
+  Actors.registerSheet("renaissance", RenaissanceCreatureSheet, {  types: ['creature'], makeDefault: true });
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("renaissance", BoilerplateItemSheet, { makeDefault: true });
 
