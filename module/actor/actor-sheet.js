@@ -8,11 +8,22 @@ export class BoilerplateActorSheet extends ActorSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["renaissance", "sheet", "actor"],
-      template: "systems/renaissance/templates/actor/actor-sheet.html",
+      //template: "systems/renaissance/templates/actor/actor-sheet.html",
       width: 600,
       height: 600,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
     });
+  }
+
+  /** @override */
+  get template() {
+    const path = "systems/renaissance/templates/actor";
+    // Return a single sheet for all item types.
+    // return `${path}/item-sheet.html`;
+
+    // Alternatively, you could use the following return statement to do a
+    // unique item sheet by type, like `weapon-sheet.html`.
+    return `${path}/${this.actor.data.type}-sheet.html`;
   }
 
   /* -------------------------------------------- */
@@ -21,12 +32,15 @@ export class BoilerplateActorSheet extends ActorSheet {
   getData() {
     const data = super.getData();
     data.dtypes = ["String", "Number", "Boolean"];
-    for (let attr of Object.values(data.data.attributes)) {
-      attr.isCheckbox = attr.dtype === "Boolean";
-    }
 
+    console.log(data)
+    
     // Prepare items.
     if (this.actor.data.type == 'character') {
+      for (let attr of Object.values(data.data.attributes)) {
+        attr.isCheckbox = attr.dtype === "Boolean";
+      }
+
       this._prepareCharacterItems(data);
     }
 

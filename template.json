@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["character"],
+    "types": ["character", "creature"],
     "templates": {
       "base": {
         "health": {
@@ -12,6 +12,36 @@
           "value": 5,
           "min": 0,
           "max": 5
+        },
+        "abilities": {
+          "str": {
+            "fullname": "Strength",
+            "value": 10
+          },
+          "con": {
+            "fullname": "Constitution",
+            "value": 10
+          },
+          "siz": {
+            "fullname": "Size",
+            "value": 10
+          },  
+          "int": {
+            "fullname": "Intelligence",
+            "value": 10
+          },
+          "pow": {
+            "fullname": "Power",
+            "value": 10
+          },
+          "dex": {
+            "fullname": "Dexterity",
+            "value": 10
+          },
+          "cha": {
+            "fullname": "Charisma",
+            "value": 10
+          }
         }
       }
     },
@@ -34,36 +64,15 @@
         "level": {
           "value": 1
         }
-      },
-      "abilities": {
-        "str": {
-          "fullname": "Strength",
-          "value": 10
-        },
-        "con": {
-          "fullname": "Constitution",
-          "value": 10
-        },
-        "siz": {
-          "fullname": "Size",
-          "value": 10
-        },  
-        "int": {
-          "fullname": "Intelligence",
-          "value": 10
-        },
-        "pow": {
-          "fullname": "Power",
-          "value": 10
-        },
-        "dex": {
-          "fullname": "Dexterity",
-          "value": 10
-        },
-        "cha": {
-          "fullname": "Charisma",
-          "value": 10
-        }
+      }
+    },
+    "creature": {
+      "templates": ["base"],
+      "movement": 0,
+      "armour":{
+        "name": "",
+        "points": "",
+        "gunPoints": ""
       }
     }
   },
