@@ -144,6 +144,7 @@ export class RenaissanceCreatureSheet extends ActorSheet {
     // Remove the type from the dataset since it's in the itemData.type prop.
     delete itemData.data["type"];
 
+    actorData.data.combatOrder = actorData.data.abilities.dex.value;
     // Finally, create the item!
     return this.actor.createOwnedItem(itemData);
   }
