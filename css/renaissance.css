@@ -170,6 +170,7 @@
 }
 
 .renaissance .sheet-tabs {
+  font-family: "Meddon", cursive;
   -webkit-box-flex: 0;
   -ms-flex: 0;
   flex: 0;
@@ -190,6 +191,7 @@
 }
 
 .renaissance .resource-label {
+  font-family: "Meddon", cursive;
   font-weight: bold;
   text-transform: capitalize;
 }
@@ -201,6 +203,7 @@
 }
 
 .renaissance .tabs .item {
+  font-style: italic;
   line-height: 40px;
   font-weight: bold;
 }
@@ -218,10 +221,12 @@
 }
 
 .renaissance .items-list .item-header {
+  font-family: "Meddon", cursive;
   font-weight: bold;
 }
 
 .renaissance .items-list .item {
+  font-style: italic;
   height: 30px;
   line-height: 24px;
   padding: 3px 0;

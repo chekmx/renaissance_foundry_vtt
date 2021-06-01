@@ -49,12 +49,13 @@ export class BoilerplateActor extends Actor {
       data.damageModifier = data.abilities.str.value + data.abilities.siz.value //this._calculateDamageModifier(actorData);
     }
       
-    data.hitPoints = Math.ceil((data.abilities.con.value + data.abilities.siz.value) / 2);
-    data.majorWoundLevel = Math.ceil(data.hitPoints / 2);
+    data.health.max = Math.ceil((data.abilities.con.value + data.abilities.siz.value) / 2);
+    data.majorWoundLevel = Math.ceil(data.health.max / 2);
     data.movementRate = 15;
   }
 
-  async testMethod(){
-    console.log("Test Method");
+  async testMethod(order){
+    this.data.data.combatOrder = order;
+    console.log(`Test Method ${order}`);
   }
 }

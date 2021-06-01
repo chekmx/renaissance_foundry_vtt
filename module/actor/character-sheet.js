@@ -111,7 +111,16 @@ export class RenaissanceCharacterSheet extends ActorSheet {
       actorData.combatOrder = actorData.data.abilities.dex.value;
       actorData.spellOrder = actorData.data.abilities.int.value ;
     }
-    actorData.data.combatOrder = actorData.combatOrder;
+    console.log(actorData)
+    if(actorData.data.orderType == "0") {
+      console.log(`use combat order ${actorData.combatOrder}`);
+      actorData.data.combatOrder = actorData.combatOrder;
+      this.actor.testMethod(actorData.combatOrder);
+    } else {
+      console.log(`use spell order ${actorData.spellOrder}`);
+      actorData.data.combatOrder = actorData.spellOrder;
+      this.actor.testMethod(actorData.spellOrder);
+    }
     console.log(actorData);
     this.actor.testMethod();
   }
@@ -144,6 +153,9 @@ export class RenaissanceCharacterSheet extends ActorSheet {
 
     // Rollable abilities.
     html.find('.rollable').click(this._onRoll.bind(this));
+
+    // combat-type selector
+    html.find('.order-selector').click(this._onOrderSelector.bind(this));
 
     // Drag events for macros.
     if (this.actor.owner) {
@@ -194,6 +206,20 @@ export class RenaissanceCharacterSheet extends ActorSheet {
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
     const item = this.actor.getOwnedItem(itemId);
     return item.roll();
+  }
+
+  /**
+   * Handle spawning the TraitSelector application which allows a checkbox of multiple trait options
+   * @param {Event} event   The click event which originated the selection
+   * @private
+   */
+   _onOrderSelector(event) {
+    event.preventDefault();
+    const a = event.currentTarget;
+    const label = a.parentElement.querySelector("label");
+    //const choices = CONFIG.DND5E[a.dataset.options];
+    const options = { name: a.dataset.target, title: label.innerText, choices };
+    //return new TraitSelector(this.actor, options).render(true)
   }
 
 }

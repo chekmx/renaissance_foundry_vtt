@@ -9,11 +9,6 @@
           "min": 0,
           "max": 10
         },
-        "power": {
-          "value": 5,
-          "min": 0,
-          "max": 5
-        },
         "abilities": {
           "str": {
             "fullname": "Strength",
@@ -60,6 +55,17 @@
       "politics": "",
       "orderTypes": ["Combat", "Spell"],
       "orderType": "",
+      "sanity": {
+        "value": 5,
+        "min": 0,
+        "max": 5
+      },
+      "majorSanityLevel": 0,
+      "righteousnessPoints": 0,
+      "faction": "",
+      "factionZeal": "",
+      "heropoints": 0,
+      "improvementPoints": 0,
       "attributes": {
         "level": {
           "value": 1
