@@ -119,7 +119,7 @@
     <section class="sheet-body">
         {{!-- Biography Tab --}}
         <div class="tab biography" data-group="primary" data-tab="description">
-          <div  class="biography grid grid-3col">
+          <div  class="biography grid grid-4col">
             <div class="resource flex-group-center">
               <div class="ability flexrow flex-group-center">
                 <label>Nationality:</label>
@@ -133,6 +133,8 @@
                 <label>Gender:</label>
                 <input type="text" name="data.gender" value="{{data.gender}}" data-dtype="String"/>
               </div>
+            </div>
+            <div class="resource flex-group-center">
               <div class="ability flexrow flex-group-center">
                 <label>Social Class:</label>
                 <input type="text" name="data.social" value="{{data.social}}" data-dtype="String"/>
@@ -141,14 +143,8 @@
                 <label>Profession:</label>
                 <input type="text" name="data.profession" value="{{data.profession}}" data-dtype="String"/>
               </div>
-              <div class="ability flexrow flex-group-center">
-                <label>Family:</label>
-                <input type="text" name="data.family" value="{{data.family}}" data-dtype="String"/>
-              </div>
-              <div class="ability flexrow flex-group-center">
-                <label>Connections:</label>
-                <input type="text" name="data.connections" value="{{data.connections}}" data-dtype="String"/>
-              </div>
+            </div>
+            <div class="resource flex-group-center">
               <div class="ability flexrow flex-group-center">
                 <label>Religion:</label>
                 <input type="text" name="data.religion" value="{{data.religion}}" data-dtype="String"/>
@@ -158,10 +154,19 @@
                 <input type="text" name="data.politics" value="{{data.politics}}" data-dtype="String"/>
               </div>
             </div>
-            <div class="resource flex-group-left" column-span="2">
-              {{editor content=data.biography target="data.biography" button=true owner=owner editable=editable}}
+            <div class="resource flex-group-center">
+              <div class="ability flexrow flex-group-center">
+                <label>Family:</label>
+                <input type="text" name="data.family" value="{{data.family}}" data-dtype="String"/>
+              </div>
+              <div class="ability flexrow flex-group-center">
+                <label>Connections:</label>
+                <input type="text" name="data.connections" value="{{data.connections}}" data-dtype="String"/>
+              </div>
             </div>
-          </div>
+          </div>  
+          <label class="resource-label">Biography</label>
+          {{editor content=data.biography target="data.biography" button=true owner=owner editable=editable}}
         </div>
 
         {{!-- Owned Items Tab --}}
@@ -201,12 +206,12 @@
                 <div class="item-name">Range</div>
                 <div class="item-name">Load</div>
                 <div class="item-controls">
-                  <a class="item-control item-create" title="Create item" data-type="item"><i class="fas fa-plus"></i> Add</a>
+                  <a class="item-control item-create" title="Create item" data-type="weapon"><i class="fas fa-plus"></i> Add</a>
                 </div>
               </li>
             {{#each actor.weapons as |item id|}}
               <li class="item flexrow" data-item-id="{{item._id}}">
-                  <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
+                  <div class="item-image rollable"  data-roll="d100+{{@data.skill}}" data-label="{{@item.name}}"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
                   <h4 class="item-name">{{item.name}}</h4>
                   <div class="item-base"><label>{{data.skill}}</label></div>
                   <div class="item-base"><label>{{data.size}}</label></div>
