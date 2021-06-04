@@ -1,7 +1,7 @@
 {
   "name": "renaissance",
-  "title": "Boilerplate",
-  "description": "The Boilerplate system for FoundryVTT!",
+  "title": "Renaissance",
+  "description": "The Renaissance d100 system for FoundryVTT!",
   "version": "1.0.4",
   "minimumCoreVersion": "0.7.5",
   "compatibleCoreVersion": "0.7.9",
