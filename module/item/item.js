@@ -53,13 +53,23 @@ export class BoilerplateItem extends Item {
         user: game.user._id,
         speaker: ChatMessage.getSpeaker({actor: this.actor}),
         roll: roll,
-        rollMode: game.settings.get("core", "rollMode"),
-        content:  `<p><b>${successDisplay}</b><br>  
-                  Against <b>${skill.data.name}</b> skill <b>${skill.data.data.value}</b>
-                  with a roll of <b>${roll.result}</b></p>
-                  damage = ${damageRoll.result}
-                  ${skill.data.data.description}`
+        rollMode: game.settings.get("core", "rollMode")
         };
+
+        const template = `systems/renaissance/templates/chat/weapon-card.html`
+
+        let templateData = {
+          actor: this.actor,
+          tokenId: token ? `${token.scene._id}.${token.id}` : null,
+          success :successDisplay,
+          skillData: skill.data,
+          item: this,
+          data: chatData,
+          damageRoll: damageRoll
+        }
+
+        chatData["content"] = await renderTemplate(template, templateData);
+
         ChatMessage.create(chatData);
     } else {
     //TO DO: Handle skills > 100.  check if auto fail for 95-99 

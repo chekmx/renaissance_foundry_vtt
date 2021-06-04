@@ -254,3 +254,7 @@
   flex: 0 0 86px;
   text-align: right;
 }
+
+.archmage.chat-card {
+  font-family: "Meddon", cursive; 
+}

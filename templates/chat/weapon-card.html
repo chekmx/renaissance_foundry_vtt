@@ -1,0 +1,52 @@
+<div class="renassiance chat-card">
+    <header class="card-header">
+      <img src="{{actor.img}}" title="{{actor.data.name}}" width="36" height="36"/>
+      <img src="{{item.img}}" title="{{item.data.name}}" width="36" height="36"/>
+      <!--h3 class="ability-usage ability-usage--recharge">{{numberFormat ability.bonus decimals=0 sign=true}} {{ability.name}}</!--h3-->
+    </header>
+    <class class="card-content">
+      <div class="description resource-label">{{actor.data.name}} fired his {{item.data.name}}</div>
+      <div class="dice-roll">
+        
+        <div class="dice-result">
+            <div class="dice-tooltip">
+              <section class="tooltip-part">
+                <div class="skill"> 
+                    <header class="part-header flexrow">
+                        <span class="part-formula">{{skillData.name}}</span>             
+                        <span class="part-total">{{skillData.data.value}}</span>
+                    </header>
+                </div>
+                <div class="dice">
+                    <header class="part-header flexrow">
+                        <span class="part-formula">{{data.roll.formula}}</span>             
+                        <span class="part-total">{{data.roll.total}}</span>
+                    </header>
+                </div>
+              </section>
+            </div>
+            <h4 class="dice-total">{{success}}</h4>
+        </div>
+        
+        <div class="dice-result">
+            <div class="dice-tooltip">
+              <section class="tooltip-part">
+                <div class="skill"> 
+                    <header class="part-header flexrow">
+                        <span class="part-formula">{{damageRoll.formula}}</span>             
+                        <span class="part-total">{{damageRoll.total}}</span>
+                    </header>
+                    <ol class="dice-rolls">
+                        {{#each damageRoll.terms as |term i|}}
+                          <li class="roll die d{{term.faces}}">{{term.total}}</li>
+                        {{/each}}
+                      </ol>    
+                </div>
+              </section>
+            </div>
+            <h4 class="dice-total">Damage: {{damageRoll.total}}</h4>
+        </div>
+    </div>
+    </class>
+</div>
+  
