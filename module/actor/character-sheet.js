@@ -111,18 +111,15 @@ export class RenaissanceCharacterSheet extends ActorSheet {
       actorData.combatOrder = actorData.data.abilities.dex.value;
       actorData.spellOrder = actorData.data.abilities.int.value ;
     }
-    console.log(actorData)
     if(actorData.data.orderType == "0") {
       console.log(`use combat order ${actorData.combatOrder}`);
       actorData.data.combatOrder = actorData.combatOrder;
-      this.actor.testMethod(actorData.combatOrder);
+      
     } else {
       console.log(`use spell order ${actorData.spellOrder}`);
-      actorData.data.combatOrder = actorData.spellOrder;
-      this.actor.testMethod(actorData.spellOrder);
+      actorData.data.combatOrder = actorData.spellOrder;    
     }
-    console.log(actorData);
-    this.actor.testMethod();
+    this.actor.setTurnOrder(actorData.data.combatOrder);
   }
 
   /* -------------------------------------------- */

@@ -54,8 +54,10 @@ export class RenaissanceActor extends Actor {
     data.movementRate = 15;
   }
 
-  async testMethod(order){
-    this.data.data.combatOrder = order;
+  async setTurnOrder(order){
+    //this.data.data.combatOrder = order;
     console.log(`Test Method ${order}`);
+    this.update({"data.combatOrder" : order});
+    //this.rollInitiative({createCombatants: false, rerollInitiative: true});
   }
 }
