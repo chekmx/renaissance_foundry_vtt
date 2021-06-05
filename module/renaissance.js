@@ -1,16 +1,16 @@
 // Import Modules
-import { BoilerplateActor } from "./actor/actor.js";
+import { RenaissanceActor } from "./actor/actor.js";
 import { RenaissanceCharacterSheet } from "./actor/character-sheet.js";
 import { RenaissanceCreatureSheet } from "./actor/creature-sheet.js"
-import { BoilerplateItem } from "./item/item.js";
+import { RenaissanceItem } from "./item/item.js";
 import { BoilerplateItemSheet } from "./item/item-sheet.js";
 //import { _getInitiativeFormula } from "./module/combat.js";
 
 Hooks.once('init', async function() {
 
   game.renaissance = {
-    BoilerplateActor,
-    BoilerplateItem,
+    RenaissanceActor,
+    RenaissanceItem,
     rollItemMacro
   };
 
@@ -26,8 +26,8 @@ Hooks.once('init', async function() {
 
 
   // Define custom Entity classes
-  CONFIG.Actor.entityClass = BoilerplateActor;
-  CONFIG.Item.entityClass = BoilerplateItem;
+  CONFIG.Actor.entityClass = RenaissanceActor;
+  CONFIG.Item.entityClass = RenaissanceItem;
   CONFIG.time.roundTime = 5;
 
   // Register sheet application classes
