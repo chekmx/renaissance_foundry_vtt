@@ -1,3 +1,6 @@
+
+import { rollWeapon } from '../rules/rollWeapon.js'
+
 /**
  * Extend the basic Item with some very simple modifications.
  * @extends {Item}
@@ -33,44 +36,11 @@ export class RenaissanceItem extends Item {
     let roll = new Roll('1d100', actorData);
     roll.evaluate();  
 
-    console.log(item);
-    console.log(this.actor);
-
-
     if(item.type == "weapon"){
       let damageRoll = new Roll(itemData.damage, actorData);
       damageRoll.evaluate();
 
-      let skill = this.actor.items.filter( (i) => i.data.type === "skill" && i.data.name === item.data.skill)[0];
-
-      console.log(skill);
-      let successDisplay = roll.result == 100 ? "FUMBLE" 
-                                              : roll.result <= skill.data.data.value / 10 ? "CRITICAL" 
-                                              : roll.result <= skill.data.data.value ? "SUCCESS" : "FAIL"
-      
-      let chatData = {
-        type: CHAT_MESSAGE_TYPES.ROLL,
-        user: game.user._id,
-        speaker: ChatMessage.getSpeaker({actor: this.actor}),
-        roll: roll,
-        rollMode: game.settings.get("core", "rollMode")
-        };
-
-        const template = `systems/renaissance/templates/chat/weapon-card.html`
-
-        let templateData = {
-          actor: this.actor,
-          tokenId: token ? `${token.scene._id}.${token.id}` : null,
-          success :successDisplay,
-          skillData: skill.data,
-          item: this,
-          data: chatData,
-          damageRoll: damageRoll
-        }
-
-        chatData["content"] = await renderTemplate(template, templateData);
-
-        ChatMessage.create(chatData);
+      await rollWeapon(this.actor, item, roll, damageRoll, token);
     } else {
     //TO DO: Handle skills > 100.  check if auto fail for 95-99 
 

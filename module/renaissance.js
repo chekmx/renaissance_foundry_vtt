@@ -4,6 +4,7 @@ import { RenaissanceCharacterSheet } from "./actor/character-sheet.js";
 import { RenaissanceCreatureSheet } from "./actor/creature-sheet.js"
 import { RenaissanceItem } from "./item/item.js";
 import { RenaissanceItemSheet } from "./item/item-sheet.js";
+import { RenaissanceWeaponItemSheet } from "./item/weapon-item-sheet.js"
 //import { _getInitiativeFormula } from "./module/combat.js";
 
 Hooks.once('init', async function() {
@@ -36,6 +37,7 @@ Hooks.once('init', async function() {
   Actors.registerSheet("renaissance", RenaissanceCreatureSheet, {  types: ['creature'], makeDefault: true });
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("renaissance", RenaissanceItemSheet, { makeDefault: true });
+  Items.registerSheet("renaissance", RenaissanceWeaponItemSheet, { types: ['weapon'], makeDefault: true });
 
   // If you need to add Handlebars helpers, here are a few useful examples:
   Handlebars.registerHelper('concat', function() {

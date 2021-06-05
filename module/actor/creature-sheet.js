@@ -77,8 +77,7 @@ export class RenaissanceCreatureSheet extends ActorSheet {
     actorData.skills = skills;
 
     actorData.data.combatOrder = actorData.data.abilities.dex.value;
-    console.log(actorData);
-    this.actor.testMethod();
+    this.actor.setTurnOrder(actorData.data.abilities.dex.value);
   }
 
   /* -------------------------------------------- */
