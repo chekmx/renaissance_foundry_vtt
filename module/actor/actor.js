@@ -1,3 +1,5 @@
+import { getDamageModifier } from "../rules/getDamageModifier.js";
+
 /**
  * Extend the base Actor entity by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
@@ -33,21 +35,7 @@ export class RenaissanceActor extends Actor {
       ability.mod = Math.floor((ability.value - 10) / 2);
     }
  
-    var damgeModSizeAndStr = data.abilities.str.value + data.abilities.siz.value
-    if (damgeModSizeAndStr <= 10){
-      data.damageModifier = "-1d6";
-    } else if (damgeModSizeAndStr <= 15) {
-      data.damageModifier = "-1d4";
-    } else if (damgeModSizeAndStr <= 25) {
-      data.damageModifier = "";
-    }  else if (damgeModSizeAndStr <= 30) {
-      data.damageModifier = "+1d4";
-    }  else if (damgeModSizeAndStr > 30) {
-      var numberOfD6s = Math.ceil((damgeModSizeAndStr - 30)/15) 
-      data.damageModifier = `+${numberOfD6s}d6`;
-    } else {
-      data.damageModifier = data.abilities.str.value + data.abilities.siz.value //this._calculateDamageModifier(actorData);
-    }
+    data.damageModifier = getDamageModifier(data.abilities.str.value + data.abilities.siz.value);
       
     data.health.max = Math.ceil((data.abilities.con.value + data.abilities.siz.value) / 2);
     data.majorWoundLevel = Math.ceil(data.health.max / 2);
@@ -55,9 +43,8 @@ export class RenaissanceActor extends Actor {
   }
 
   async setTurnOrder(order){
-    //this.data.data.combatOrder = order;
-    console.log(`Test Method ${order}`);
     this.update({"data.combatOrder" : order});
-    //this.rollInitiative({createCombatants: false, rerollInitiative: true});
   }
 }
+
+
