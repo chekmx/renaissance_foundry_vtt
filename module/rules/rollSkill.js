@@ -1,11 +1,10 @@
+import { D100Roll } from "./D100Roll.js";
+
 export async function rollSkill(actor, item, roll, token) {
 
     const itemData = item.data;
 
-    console.log(item);
-    let successDisplay = roll.result == 100 ? "FUMBLE"
-      : roll.result <= item.data.value / 10 ? "CRITICAL"
-        : roll.result <= item.data.value ? "SUCCESS" : "FAIL";
+    let successDisplay = D100Roll(roll, item);
 
     let chatData = {
       type: CHAT_MESSAGE_TYPES.ROLL,
@@ -29,3 +28,5 @@ export async function rollSkill(actor, item, roll, token) {
 
     ChatMessage.create(chatData);
 }
+
+
