@@ -83,7 +83,7 @@
     }
   },
   "Item": {
-    "types": ["item", "skill", "spell", "fatigue", "weapon", "armour", "faction"],
+    "types": ["item", "skill", "spell", "fatigue", "weapon", "armour", "faction", "spellTraits"],
     "templates": {
       "base": {
         "description": ""
@@ -102,7 +102,11 @@
     },
     "spell": {
       "templates": ["base"],
-      "spellLevel": 1
+      "spellLevel": 1,
+      "traits": []
+    },
+    "spellTraits": {
+      "templates": ["base"]
     },
     "armour" :{
       "templates": ["item"],
