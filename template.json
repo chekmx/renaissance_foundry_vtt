@@ -102,11 +102,23 @@
     },
     "spell": {
       "templates": ["base"],
-      "spellLevel": 1,
-      "traits": []
+      "area" : 0,
+      "charm" : false,
+      "concentration" : false,
+      "distant" : false,
+      "duration" : 0,
+      "eyeContact" : false,
+      "instant": false,
+      "magnitude" : 0,
+      "progressive" : false,
+      "ranged" : false,
+      "resist" : "",
+      "touch" : false,
+      "trigger" : false
     },
     "spellTraits": {
-      "templates": ["base"]
+      "templates": ["base"],
+      "value": ""
     },
     "armour" :{
       "templates": ["item"],
