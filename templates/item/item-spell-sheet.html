@@ -23,15 +23,83 @@
         {{!-- Attributes Tab --}}
         <div class="tab attributes" data-group="primary" data-tab="attributes">
             {{!-- As you add new fields, add them in here! --}}
-            <div class="resource">
-              <label class="resource-label">Spell Level</label>
-                <input type="text" name="data.spellLevel" value="{{data.spellLevel}}" data-dtype="Number"/>
-            </div>
+            <div class="resources grid grid-3col">
+                <div class="abilities _grid">
+                    <div class="resource" flex-group-center>
+                        <div class="ability flexrow flex-group-center">
+                            <label class="resource-label">Area</label>
+                            <input type="text" name="data.area" value="{{data.area}}" data-dtype="Number"/>
+                        </div>
+                    </div>
 
-            <div class="resource">
-                <label class="resource-label">Is Charm</label>
-                  <input type="checkbox" name="data.charm" {{checked data.charm}}/>
-              </div>
+                    <div class="resource" flex-group-center>
+                        <div class="ability flexrow flex-group-center">
+                            <label class="resource-label">Duration</label>
+                            <input type="text" name="data.duration" value="{{data.duration}}" data-dtype="Number"/>
+                        </div>
+                    </div>
+
+                    <div class="resource" flex-group-center>
+                        <div class="ability flexrow flex-group-center">
+                            <Magnitude class="resource-label">Magnitude</label>
+                            <input type="text" name="data.magnitude" value="{{data.magnitude}}" data-dtype="Number"/>
+                        </div>
+                    </div>
+
+                    <div class="resource" flex-group-center>
+                        <div class="ability flexrow flex-group-center">
+                            <Magnitude class="resource-label">Resist</label>
+                            <input type="text" name="data.resist" value="{{data.resist}}" data-dtype="String"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="abilities _grid">
+                    <div class="resource">
+                        <label class="resource-label">Is Charm</label>
+                        <input type="checkbox" name="data.charm" {{checked data.charm}}/>
+                    </div>
+                    <div class="resource">
+                        <label class="resource-label">Is Eye Contact</label>
+                        <input type="checkbox" name="data.eyeContact" {{checked data.eyeContact}}/>
+                    </div>
+
+                    <div class="resource">
+                        <label class="resource-label">Is Instant</label>
+                        <input type="checkbox" name="data.instant" {{checked data.instant}}/>
+                    </div>
+
+                    <div class="resource">
+                        <label class="resource-label">Is Progressive</label>
+                        <input type="checkbox" name="data.progressive" {{checked data.progressive}}/>
+                    </div>
+                </div>
+                <div class="abilities _grid">
+                    <div class="resource">
+                        <label class="resource-label">Is Concentration</label>
+                        <input type="checkbox" name="data.concentration" {{checked data.concentration}}/>
+                    </div>
+                
+                    <div class="resource">
+                        <label class="resource-label">Is Distant</label>
+                        <input type="checkbox" name="data.distant" {{checked data.distant}}/>
+                    </div>
+
+                    <div class="resource">
+                        <label class="resource-label">Is Ranged</label>
+                        <input type="checkbox" name="data.ranged" {{checked data.ranged}}/>
+                    </div>
+
+                    <div class="resource">
+                        <label class="resource-label">Is Touch</label>
+                        <input type="checkbox" name="data.touch" {{checked data.touch}}/>
+                    </div>
+
+                    <div class="resource">
+                        <label class="resource-label">Is Trigger</label>
+                        <input type="checkbox" name="data.trigger" {{checked data.trigger}}/>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </form>

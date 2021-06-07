@@ -17,6 +17,14 @@ export async function rollWeapon(actor, item, roll, damageRoll, token) {
       rollMode: game.settings.get("core", "rollMode")
     };
 
+    let damageRollChatData = {
+      type: CHAT_MESSAGE_TYPES.ROLL,
+      user: game.user._id,
+      speaker: ChatMessage.getSpeaker({ actor: actor }),
+      roll: damageRoll,
+      rollMode: game.settings.get("core", "rollMode")
+    }
+
     const template = `systems/renaissance/templates/chat/weapon-card.html`;
 
     let templateData = {
@@ -26,10 +34,21 @@ export async function rollWeapon(actor, item, roll, damageRoll, token) {
       skillData: skill.data,
       item: item,
       data: chatData,
-      damageRoll: damageRoll
+      damageRoll: damageRollChatData
     };
 
-    chatData["content"] = await renderTemplate(template, templateData);
+    if (game.dice3d) {
+      await game.dice3d.showForRoll(roll, game.user, true);
+      await game.dice3d.showForRoll(damageRoll, game.user, true);
+    }
+    
+    chatData["content"] = await renderTemplate(template, templateData).then(content => {
+      ChatMessage.create({
+        user: game.user._id,
+        speaker :ChatMessage.getSpeaker({actor: actor}),
+        content: content
+      });
+    });
 
-    ChatMessage.create(chatData);
+
 }

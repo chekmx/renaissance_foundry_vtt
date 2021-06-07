@@ -85,8 +85,10 @@ export class RenaissanceCharacterSheet extends ActorSheet {
       }
       // Append to spells.
       else if (i.type === 'spell') {
-        if (i.data.spellLevel != undefined) {
-          spells[i.data.spellLevel].push(i);
+        console.log(i);
+        if (i.data.magnitude != undefined) {
+          console.log(i.name);
+          spells[i.data.magnitude].push(i);
         }
       }
     }

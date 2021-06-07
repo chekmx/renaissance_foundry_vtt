@@ -42,25 +42,7 @@ export class RenaissanceItem extends Item {
 
       await rollWeapon(this.actor, item, roll, damageRoll, token);
     } else {
-    //TO DO: Handle skills > 100.  check if auto fail for 95-99 
       await rollSkill(this.actor, item, roll, token)
-
-      // let successDisplay = roll.result == 100 ? "FUMBLE" 
-      //                                         : roll.result <= item.data.value / 10 ? "CRITICAL" 
-      //                                         : roll.result <= item.data.value ? "SUCCESS" : "FAIL"
-      
-      // let chatData = {
-      //   type: CHAT_MESSAGE_TYPES.ROLL,
-      //   user: game.user._id,
-      //   speaker: ChatMessage.getSpeaker({actor: this.actor}),
-      //   roll: roll,
-      //   rollMode: game.settings.get("core", "rollMode"),
-      //   content:  `<p><b>${successDisplay}</b><br>  
-      //             Against Target <b>${item.data.value}</b>
-      //             with a roll of <b>${roll.result}</b></p>
-      //             ${item.data.description}`
-      //   };
-      //   ChatMessage.create(chatData);
     }
   }
 }

@@ -32,18 +32,18 @@
               <section class="tooltip-part">
                 <div class="skill"> 
                     <header class="part-header flexrow">
-                        <span class="part-formula">{{damageRoll.formula}}</span>             
-                        <span class="part-total">{{damageRoll.total}}</span>
+                        <span class="part-formula">{{damageRoll.roll.formula}}</span>             
+                        <span class="part-total">{{damageRoll.roll.total}}</span>
                     </header>
                     <ol class="dice-rolls">
-                        {{#each damageRoll.terms as |term i|}}
+                        {{#each damageRoll.roll.terms as |term i|}}
                           <li class="roll die d{{term.faces}}">{{term.total}}</li>
                         {{/each}}
                       </ol>    
                 </div>
               </section>
             </div>
-            <h4 class="dice-total">Damage: {{damageRoll.total}}</h4>
+            <h4 class="dice-total">Damage: {{damageRoll.data.total}}</h4>
         </div>
     </div>
     </class>
