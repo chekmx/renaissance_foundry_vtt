@@ -59,7 +59,6 @@ export class RenaissanceCharacterSheet extends ActorSheet {
     const gear = [];
     const skills = [];
     const spells = {
-      0: [],
       1: [],
       2: [],
       3: [],
