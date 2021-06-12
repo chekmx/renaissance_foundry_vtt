@@ -1,29 +1,17 @@
 import { D100Roll } from "./D100Roll.js";
 
-export async function rollWeapon(actor, item, roll, damageRoll, token) {
+export async function rollWeapon(actor, item, roll, token) {
 
     const itemData = item.data;
+
+    //TODO roll on success?
+    let damageRoll = new Roll(itemData.damage, actor.data);
+    damageRoll.evaluate();
 
     let skill = actor.items.filter((i) => i.data.type === "skill" && i.data.name === itemData.skill)[0];
 
     console.log(skill);
     let successDisplay = D100Roll(roll, skill.data)
-
-    let chatData = {
-      type: CHAT_MESSAGE_TYPES.ROLL,
-      user: game.user._id,
-      speaker: ChatMessage.getSpeaker({ actor: actor }),
-      roll: roll,
-      rollMode: game.settings.get("core", "rollMode")
-    };
-
-    let damageRollChatData = {
-      type: CHAT_MESSAGE_TYPES.ROLL,
-      user: game.user._id,
-      speaker: ChatMessage.getSpeaker({ actor: actor }),
-      roll: damageRoll,
-      rollMode: game.settings.get("core", "rollMode")
-    }
 
     const template = `systems/renaissance/templates/chat/weapon-card.html`;
 
@@ -33,16 +21,16 @@ export async function rollWeapon(actor, item, roll, damageRoll, token) {
       success: successDisplay,
       skillData: skill.data,
       item: item,
-      data: chatData,
-      damageRoll: damageRollChatData
+      roll: roll,
+      damageRoll: damageRoll
     };
 
     if (game.dice3d) {
       await game.dice3d.showForRoll(roll, game.user, true);
       await game.dice3d.showForRoll(damageRoll, game.user, true);
     }
-    
-    chatData["content"] = await renderTemplate(template, templateData).then(content => {
+
+    await renderTemplate(template, templateData).then(content => {
       ChatMessage.create({
         user: game.user._id,
         speaker :ChatMessage.getSpeaker({actor: actor}),

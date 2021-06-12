@@ -1,0 +1,32 @@
+<div class="renassiance chat-card">
+    <header class="card-header">
+      <img src="{{actor.img}}" title="{{actor.data.name}}" width="36" height="36"/>
+      <img src="{{item.img}}" title="{{item.name}}" width="36" height="36"/>
+    </header>
+    <class class="card-content">
+      <div class="description resource-label">{{actor.data.name}} cast {{item.name}} skill</div>
+      <div class="dice-roll">
+        
+        <div class="dice-result">
+            <div class="dice-tooltip">
+              <section class="tooltip-part">
+                <div class="skill"> 
+                    <header class="part-header flexrow">
+                        <span class="part-formula">{{item.name}}</span>             
+                        <span class="part-total">{{item.data.value}}</span>
+                    </header>
+                </div>
+                <div class="dice">
+                    <header class="part-header flexrow">
+                        <span class="part-formula">{{data.roll.formula}}</span>             
+                        <span class="part-total">{{data.roll.total}}</span>
+                    </header>
+                </div>
+              </section>
+            </div>
+            <h4 class="dice-total">{{success}}</h4>
+        </div>
+    </div>
+    </class>
+</div>
+  

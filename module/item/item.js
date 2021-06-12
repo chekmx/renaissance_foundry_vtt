@@ -1,5 +1,6 @@
 import { rollWeapon } from '../rules/rollWeapon.js'
 import { rollSkill } from '../rules/rollSkill.js'
+import { rollSpell } from '../rules/rollSpell.js'
 
 /**
  * Extend the basic Item with some very simple modifications.
@@ -37,10 +38,9 @@ export class RenaissanceItem extends Item {
     roll.evaluate();  
 
     if(item.type == "weapon"){
-      let damageRoll = new Roll(itemData.damage, actorData);
-      damageRoll.evaluate();
-
-      await rollWeapon(this.actor, item, roll, damageRoll, token);
+      await rollWeapon(this.actor, item, roll, token);
+    } else if (item.type == "spell") {
+      await rollSpell(this.actor, item, roll, token)
     } else {
       await rollSkill(this.actor, item, roll, token)
     }
