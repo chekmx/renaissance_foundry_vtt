@@ -4,7 +4,9 @@ export async function rollSpell(actor, item, roll, token) {
 
     const itemData = item.data;
 
-    let successDisplay = D100Roll(roll, item);
+    let skill = actor.items.filter((i) => i.data.type === "skill" && i.data.name === itemData.skill)[0];
+
+    let successDisplay = D100Roll(roll, skill);
 
     let chatData = {
       type: CHAT_MESSAGE_TYPES.ROLL,

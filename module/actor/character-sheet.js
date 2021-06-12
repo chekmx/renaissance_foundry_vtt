@@ -54,6 +54,7 @@ export class RenaissanceCharacterSheet extends ActorSheet {
   _prepareCharacterItems(sheetData) {
     const actorData = sheetData.actor;
 
+ 
     // Initialize containers.
     const gear = [];
     const skills = [];
@@ -87,7 +88,6 @@ export class RenaissanceCharacterSheet extends ActorSheet {
       else if (i.type === 'spell') {
         console.log(i);
         if (i.data.magnitude != undefined) {
-          console.log(i.name);
           spells[i.data.magnitude].push(i);
         }
       }
@@ -153,7 +153,8 @@ export class RenaissanceCharacterSheet extends ActorSheet {
     // Rollable abilities.
     html.find('.rollable').click(this._onRoll.bind(this));
 
-    // combat-type selector
+    // TO DO confirm if this is used  
+    // combat-type selector 
     html.find('.order-selector').click(this._onOrderSelector.bind(this));
 
     // Drag events for macros.

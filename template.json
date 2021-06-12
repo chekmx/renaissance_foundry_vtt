@@ -102,6 +102,7 @@
     },
     "spell": {
       "templates": ["base"],
+      "skill": 0,
       "area" : 0,
       "charm" : false,
       "concentration" : false,

@@ -25,11 +25,15 @@
             {{!-- As you add new fields, add them in here! --}}
             <div class="resource">
                 <label class="resource-label">First Base Stat</label>
-                <input type="text" name="data.base1" value="{{data.base1}}" data-dtype="String"/>
+                <select name="data.base1" data-type="String">
+                    {{selectOptions abilities selected=data.base1}}
+                  </select>
             </div>
             <div class="resource">
-                <label class="resource-label">First Base Stat</label>
-                <input type="text" name="data.base2" value="{{data.base2}}" data-dtype="String"/>
+                <label class="resource-label">Second Base Stat</label>
+                <select name="data.base2" data-type="String">
+                    {{selectOptions abilities selected=data.base2}}
+                  </select>
             </div>
             <div class="resource">
                 <label class="resource-label">%</label>
