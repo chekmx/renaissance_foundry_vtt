@@ -1,3 +1,4 @@
+import { getBaseSkill } from '../rules/getBaseSkill.js'
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
@@ -72,7 +73,7 @@ export class RenaissanceCharacterSheet extends ActorSheet {
     // Iterate through items, allocating to containers
     
     for (let i of sheetData.items) {
-      let item = i.data;
+      //let item = i.data;
       i.img = i.img || DEFAULT_TOKEN;
       // Append to gear.
       if (i.type === 'item'  || i.type === 'armour'  || i.type === 'weapon') {
@@ -80,6 +81,11 @@ export class RenaissanceCharacterSheet extends ActorSheet {
       }
       // Append to skills.
       else if (i.type === 'skill') {
+        console.log(i);
+        i.data.baseSkill = getBaseSkill(actorData, i)
+        if(i.data.value == 0){
+          i.data.value = i.data.baseSkill;
+        }
         skills.push(i);
       }
       // Append to spells.

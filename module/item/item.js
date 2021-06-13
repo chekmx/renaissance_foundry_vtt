@@ -1,7 +1,7 @@
 import { rollWeapon } from '../rules/rollWeapon.js'
 import { rollSkill } from '../rules/rollSkill.js'
 import { rollSpell } from '../rules/rollSpell.js'
-
+import { getBaseSkill} from '../rules/getBaseSkill.js'
 /**
  * Extend the basic Item with some very simple modifications.
  * @extends {Item}
@@ -23,31 +23,13 @@ export class RenaissanceItem extends Item {
     
     //CalculateBaseSkill
     if(itemData.type == "skill"){
-      this.setBaseSkill(actorData, itemData, data);
+      data.baseSkill = getBaseSkill(actorData, itemData, data);
+      if( data.value == 0){
+        data.value = data.baseSkill
+      }
     }
     //this.update({"data.baseSkill" : data.baseSkill});
     //console.log(this)
-  }
-
-  async setBaseSkill(actorData, itemData, data) {
-    if (this.actor) {
-      let baseAbility1 = this.getAbility(actorData, itemData.data.base1.toLowerCase());
-      let baseAbility2 = this.getAbility(actorData, itemData.data.base2.toLowerCase());
-      // let base2Attribute = Object.entries(actorData.data.abilities)[itemData.data.base2.toLowerCase()];
-      data.baseSkill = baseAbility1.value + baseAbility2.value;
-      
-    }
-  }
-
-  getAbility(actorData, abilityName) {
-    let ability ={};
-    Object.entries(actorData.data.abilities).forEach((pair) => {
-
-      if (pair[0] == abilityName) {
-        ability = pair[1];
-      }
-    });
-    return ability;
   }
 
   /**
