@@ -4,13 +4,19 @@ export async function rollWeapon(actor, item, roll, token) {
 
     const itemData = item.data;
 
-    //TODO roll on success?
-    let damageRoll = new Roll(itemData.damage, actor.data);
-    damageRoll.evaluate();
-
     let skill = actor.items.filter((i) => i.data.type === "skill" && i.data.name === itemData.skill)[0];
 
-     let successDisplay = D100Roll(roll, skill.data)
+    let damageRoll = "";
+    if(skill.name != "Gun Combat" && skill.name != "Ranged Combat" && skill.name != "Ranged Combat(Bows)"){
+      damageRoll = new Roll(itemData.damage + actor.data.data.damageModifier, actor.data);
+    } else {
+      damageRoll = new Roll(itemData.damage, actor.data);
+    }
+
+    damageRoll.evaluate();
+
+    console.log(damageRoll);
+    let successDisplay = D100Roll(roll, skill.data)
 
     const template = `systems/renaissance/templates/chat/weapon-card.html`;
 

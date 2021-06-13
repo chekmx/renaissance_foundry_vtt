@@ -20,7 +20,7 @@
                     <header class="part-header flexrow">
                         <span class="part-formula">{{roll.formula}}</span>             
                         <span class="part-total">{{roll.total}}</span>
-                    </header>
+                    </header> 
                 </div>
               </section>
             </div>
@@ -37,9 +37,11 @@
                     </header>
                     <ol class="dice-rolls">
                         {{#each damageRoll.terms as |term i|}}
-                          <li class="roll die d{{term.faces}}">{{term.total}}</li>
+                          {{#each term.results as |result j|}}
+                            <li class="roll die d{{term.faces}}">{{result.result}}</li>
+                          {{/each}}
                         {{/each}}
-                      </ol>    
+                    </ol>    
                 </div>
               </section>
             </div>
