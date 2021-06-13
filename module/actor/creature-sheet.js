@@ -33,7 +33,7 @@ export class RenaissanceCreatureSheet extends ActorSheet {
     const data = super.getData();
     data.dtypes = ["String", "Number", "Boolean"];
 
-    console.log(data)
+    //console.log(data)
     
     // Prepare items.
     if (this.actor.data.type == 'character') {

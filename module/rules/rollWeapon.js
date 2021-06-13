@@ -10,8 +10,7 @@ export async function rollWeapon(actor, item, roll, token) {
 
     let skill = actor.items.filter((i) => i.data.type === "skill" && i.data.name === itemData.skill)[0];
 
-    console.log(skill);
-    let successDisplay = D100Roll(roll, skill.data)
+     let successDisplay = D100Roll(roll, skill.data)
 
     const template = `systems/renaissance/templates/chat/weapon-card.html`;
 

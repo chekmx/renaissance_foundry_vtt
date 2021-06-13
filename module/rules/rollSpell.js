@@ -4,7 +4,6 @@ export async function rollSpell(actor, item, roll, token) {
 
     const itemData = item.data;
 
-    console.log(itemData)
     let skill = actor.items.filter((i) => i.data.type === "skill").filter((i) => i.data.name === itemData.skill)[0];
 
     let successDisplay = D100Roll(roll, skill.data);

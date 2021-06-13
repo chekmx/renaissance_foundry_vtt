@@ -1,5 +1,4 @@
 export function getDamageModifier(damgeModSizeAndStr) {
-  console.log(damgeModSizeAndStr)
   if (damgeModSizeAndStr <= 10) {
     return "-1d6";
   } else if (damgeModSizeAndStr <= 15) {

@@ -32,7 +32,7 @@
                     <span>   </span>
                     <input type="text" name="data.health.value" value="{{data.health.value}}" data-dtype="Number"/>
                     <span> / </span>
-                    <label name="data.health.max">{{data.health.value}}</label>
+                    <label name="data.health.max">{{data.health.max}}</label>
                   </div>
                   <div class="ability flexrow flex-group-center">
                     <label>Major wound:</label>
@@ -235,7 +235,7 @@
                 <li class="item flexrow item-header">
                   <div class="item-image"></div>
                   <div class="item-name">Name</div>
-                  <div class="item-name">Base</div>
+                  <div class="item-name">Base %</div>
                   <div class="item-name">%</div>
                   <div class="item-controls">
                     <a class="item-control item-create" title="Create item" data-type="skill"><i class="fas fa-plus"></i> Add</a>
@@ -245,7 +245,7 @@
                 <li class="item flexrow" data-item-id="{{skill._id}}">
                     <div class="item-image rollable" data-roll="d100+{{@data.value}}" data-label="{{@skill.name}}"><img src="{{skill.img}}" title="{{skill.name}}" width="24" height="24"/></div>
                     <h4 class="item-name">{{skill.name}}</h4>
-                    <div class="item-base"><label>{{data.base1}}  & {{data.base2}}</label></div>
+                    <div class="item-base"><label>{{data.base1}} & {{data.base2}}</label> <label>{{data.baseSkill}}</label></div>
                     <div class="item-base"><label>{{data.value}}</label></div>
                     <div class="item-controls">
                         <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>

@@ -20,6 +20,34 @@ export class RenaissanceItem extends Item {
     if(itemData.type === "armour"){
       data.gunPoints = Math.floor(data.points / 2);
     }
+    
+    //CalculateBaseSkill
+    if(itemData.type == "skill"){
+      this.setBaseSkill(actorData, itemData, data);
+    }
+    //this.update({"data.baseSkill" : data.baseSkill});
+    //console.log(this)
+  }
+
+  async setBaseSkill(actorData, itemData, data) {
+    if (this.actor) {
+      let baseAbility1 = this.getAbility(actorData, itemData.data.base1.toLowerCase());
+      let baseAbility2 = this.getAbility(actorData, itemData.data.base2.toLowerCase());
+      // let base2Attribute = Object.entries(actorData.data.abilities)[itemData.data.base2.toLowerCase()];
+      data.baseSkill = baseAbility1.value + baseAbility2.value;
+      
+    }
+  }
+
+  getAbility(actorData, abilityName) {
+    let ability ={};
+    Object.entries(actorData.data.abilities).forEach((pair) => {
+
+      if (pair[0] == abilityName) {
+        ability = pair[1];
+      }
+    });
+    return ability;
   }
 
   /**

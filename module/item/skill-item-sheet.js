@@ -21,9 +21,7 @@ export class RenaissanceSkillItemSheet extends ItemSheet {
   getData() {
     const data = super.getData();
     let abilities = { Str : "Strength", Con : "Constitution", Siz : "Size", Int: "Intelligence", Pow :"Power", Dex :"Dexterity", Cha :"Charisma"};
-    console.log(data);
     data.abilities = abilities;
-    console.log(data);
     return data;
   }
 

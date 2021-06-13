@@ -32,8 +32,6 @@ export class RenaissanceCharacterSheet extends ActorSheet {
     const data = super.getData();
     data.dtypes = ["String", "Number", "Boolean"];
 
-    console.log(data)
-    
     // Prepare items.
     if (this.actor.data.type == 'character') {
       for (let attr of Object.values(data.data.attributes)) {
@@ -58,6 +56,7 @@ export class RenaissanceCharacterSheet extends ActorSheet {
     // Initialize containers.
     const gear = [];
     const skills = [];
+
     const spells = {
       1: [],
       2: [],
@@ -71,7 +70,7 @@ export class RenaissanceCharacterSheet extends ActorSheet {
     };
 
     // Iterate through items, allocating to containers
-    // let totalWeight = 0;
+    
     for (let i of sheetData.items) {
       let item = i.data;
       i.img = i.img || DEFAULT_TOKEN;
@@ -85,7 +84,7 @@ export class RenaissanceCharacterSheet extends ActorSheet {
       }
       // Append to spells.
       else if (i.type === 'spell') {
-        console.log(i);
+        //console.log(i);
         if (i.data.magnitude != undefined) {
           spells[i.data.magnitude].push(i);
         }
@@ -113,11 +112,11 @@ export class RenaissanceCharacterSheet extends ActorSheet {
       actorData.spellOrder = actorData.data.abilities.int.value ;
     }
     if(actorData.data.orderType == "0") {
-      console.log(`use combat order ${actorData.combatOrder}`);
+      //console.log(`use combat order ${actorData.combatOrder}`);
       actorData.data.combatOrder = actorData.combatOrder;
       
     } else {
-      console.log(`use spell order ${actorData.spellOrder}`);
+      //console.log(`use spell order ${actorData.spellOrder}`);
       actorData.data.combatOrder = actorData.spellOrder;    
     }
     this.actor.setTurnOrder(actorData.data.combatOrder);
@@ -141,6 +140,12 @@ export class RenaissanceCharacterSheet extends ActorSheet {
       const item = this.actor.getOwnedItem(li.data("itemId"));
       item.sheet.render(true);
     });
+
+    // html.find('.item-update').change( ev =>{
+    //   const li = $(ev.currentTarget).parents(".item");
+    //   console.log(li);
+    //   const item = this.actor.getOwnedItem(li.data("itemId"));
+    // });
 
     // Delete Inventory Item
     html.find('.item-delete').click(ev => {
