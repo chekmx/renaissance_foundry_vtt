@@ -43,6 +43,7 @@
     },
     "character": {
       "templates": ["base"],
+      "magick": 0,
       "biography": "",
       "nationality": "",
       "age": 0,

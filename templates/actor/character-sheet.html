@@ -17,13 +17,17 @@
             use both the "grid" and "grid-Ncol" class where "N" can be any number
             from 1 to 12 and will create that number of columns.  --}}
             <div class="resources grid grid-3col">
-              <div class="abilities _grid">
+              <div>
                 {{#each data.abilities as |ability key|}}
                   <div class="ability flexrow flex-group-center">
                     <label for="data.abilities.{{key}}.value" class="resource-label">{{ability.fullname}}</label>
                     <input type="text" name="data.abilities.{{key}}.value" value="{{ability.value}}" data-dtype="Number"/>
                   </div>
                 {{/each}}
+                <div class="ability flexrow flex-group-center">
+                  <label for="data.magick.value" class="resource-label">Magick</label>
+                  <input type="text" name="data.magick" value="{{data.magick}}" data-dtype="Number"/>
+                </div>
               </div>
               <div  class="characteristics _grid">
                 <div class="resource flex-group-center">

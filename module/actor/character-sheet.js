@@ -81,7 +81,6 @@ export class RenaissanceCharacterSheet extends ActorSheet {
       }
       // Append to skills.
       else if (i.type === 'skill') {
-        console.log(i);
         i.data.baseSkill = getBaseSkill(actorData, i)
         if(i.data.value == 0){
           i.data.value = i.data.baseSkill;
@@ -90,7 +89,6 @@ export class RenaissanceCharacterSheet extends ActorSheet {
       }
       // Append to spells.
       else if (i.type === 'spell') {
-        //console.log(i);
         if (i.data.magnitude != undefined) {
           spells[i.data.magnitude].push(i);
         }
@@ -101,6 +99,12 @@ export class RenaissanceCharacterSheet extends ActorSheet {
     actorData.gear = gear;
     actorData.skills = skills;
     actorData.spells = spells;
+
+    let baseMagick =  Math.ceil((actorData.data.abilities.int.value + actorData.data.abilities.pow.value) / 10);
+
+    if(baseMagick > actorData.data.magick || actorData.data.magick == undefined){
+      actorData.data.magick = baseMagick;
+    }
 
     actorData.currentArmour = actorData.gear.filter( function (e) {
       return e.type === "armour"

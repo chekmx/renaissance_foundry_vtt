@@ -21,15 +21,12 @@ export class RenaissanceItem extends Item {
       data.gunPoints = Math.floor(data.points / 2);
     }
     
-    //CalculateBaseSkill
     if(itemData.type == "skill"){
       data.baseSkill = getBaseSkill(actorData, itemData, data);
       if( data.value == 0){
         data.value = data.baseSkill
       }
     }
-    //this.update({"data.baseSkill" : data.baseSkill});
-    //console.log(this)
   }
 
   /**
@@ -42,7 +39,6 @@ export class RenaissanceItem extends Item {
     const token = this.actor.token;
     const item = this.data;
     const actorData = this.actor ? this.actor.data.data : {};
-    const itemData = item.data;
 
     let roll = new Roll('1d100', actorData);
     roll.evaluate();  
