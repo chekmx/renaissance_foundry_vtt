@@ -15,8 +15,26 @@
       "name": "commmonSkills",
       "label": "Commons Skills",
       "system": "renaissance",
-      "path": "./packs/skills.db",
+      "path": "./packs/common-skills.db",
       "entity": "Item"
+    },{
+      "name": "armour",
+      "label": "Armour",
+      "system": "renaissance",
+      "path": "./packs/armour.db",
+      "entity": "Item"
+    },{
+      "name": "advancedSkills",
+      "label": "Advanced Skills",
+      "system": "renaissance",
+      "path": "./packs/advanced-skills.db",
+      "entity": "Item"
+    },{
+      "name": "bestiary",
+      "label": "Bestiary",
+      "system": "renaissance",
+      "path": "./packs/bestiary.db",
+      "entity": "Actor"
     }
   ],
   "languages": [
