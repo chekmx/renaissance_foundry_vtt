@@ -24,7 +24,6 @@
 
     {{!-- Sheet Body --}}
     <section class="sheet-body">
-
         {{!-- Description Tab --}}
         <div class="tab" data-group="primary" data-tab="description">
             {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
@@ -33,38 +32,52 @@
         {{!-- Attributes Tab --}}
         <div class="tab attributes" data-group="primary" data-tab="attributes">
           <div class="resource">
-            <label class="resource-label">Skill</label>
-            <input type="text" name="data.skill" value="{{data.skill}}" data-dtype="String"/>
+            <div class="grid grid-3col">
+              <div class="resource">
+                <div class="resource"><label class="resource-label">Skill </label></div>
+                <select name="data.skill" data-type="String">
+                  {{selectOptions combatSkills selected=data.skill}}
+                </select>
+              </div>
+              <div class="resource">
+                <div class="resource"><label class="resource-label">Size </label></div>
+                <select name="data.size" data-type="String">
+                  {{selectOptions combatSizes selected=data.size}}
+                </select>
+              </div>
+              <div class="resource">
+                <label class="resource-label">Damage</label>
+                <input type="text" name="data.damage" value="{{data.damage}}" data-dtype="String"/>
+              </div>
+            </div>
           </div>
           <div class="resource">
-            <label class="resource-label">Size</label>
-            <input type="text" name="data.size" value="{{data.size}}" data-dtype="String"/>
-          </div>
-          <div class="resource">
-            <label class="resource-label">Damage</label>
-            <input type="text" name="data.damage" value="{{data.damage}}" data-dtype="String"/>
-          </div>
-          <div class="resource">
-            <label class="resource-label">Minimum Strength</label>
-            <input type="text" name="data.minimumStr" value="{{data.minimumStr}}" data-dtype="String"/>
-          </div>
-          <div class="resource">
-            <label class="resource-label">Minimum Dexterity</label>
-            <input type="text" name="data.minimumDex" value="{{data.minimumDex}}" data-dtype="String"/>
+            <div class="grid grid-2col">
+              <div class="resource">
+                <div class="resource"><label class="resource-label">Minimum Strength</label></div>
+                <input type="text" name="data.minimumStr" value="{{data.minimumStr}}" data-dtype="String"/>
+              </div>
+              <div class="resource">
+                <div class="resource"><label class="resource-label">Minimum Dexterity</label></div>
+                <input type="text" name="data.minimumDex" value="{{data.minimumDex}}" data-dtype="String"/>
+              </div>
           </div>
           <div class="resource">
             <label class="resource-label">Notes</label>
             <input type="text" name="data.notes" value="{{data.notes}}" data-dtype="String"/>
           </div>
           <div class="resource">
-            <label class="resource-label">Range</label>
-            <input type="text" name="data.range" value="{{data.range}}" data-dtype="String"/>
+            <div class="grid grid-2col">
+              <div class="resource">
+                <div class="resource"><label class="resource-label">Range</label></div>
+                <input type="text" name="data.range" value="{{data.range}}" data-dtype="String"/>
+              </div>
+              <div class="resource">
+                <div class="resource"><label class="resource-label">Load</label></div>
+                <input type="text" name="data.load" value="{{data.load}}" data-dtype="String"/>
+              </div>
+            </div>
           </div>
-          <div class="resource">
-            <label class="resource-label">Load</label>
-            <input type="text" name="data.load" value="{{data.load}}" data-dtype="String"/>
-          </div>
-        </div>
         </div>
     </section>
 </form>
