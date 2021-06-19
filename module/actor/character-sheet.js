@@ -82,7 +82,7 @@ export class RenaissanceCharacterSheet extends ActorSheet {
       // Append to skills.
       else if (i.type === 'skill') {
         i.data.baseSkill = getBaseSkill(actorData, i)
-        if(i.data.value == 0){
+        if(i.data.value == null || i.data.value == 0){
           i.data.value = i.data.baseSkill;
         }
         skills.push(i);
