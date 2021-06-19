@@ -9,8 +9,8 @@ export class RenaissanceCreatureSheet extends ActorSheet {
     return mergeObject(super.defaultOptions, {
       classes: ["renaissance", "sheet", "actor", "creature"],
       template: "systems/renaissance/templates/actor/creature-sheet.html",
-      width: 1200,
-      height: 500,
+      width: 1000,
+      height: 650,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
     });
   }
@@ -57,6 +57,18 @@ export class RenaissanceCreatureSheet extends ActorSheet {
 
     // Initialize containers.
     const skills = [];
+    const gear = [];
+    const spells = {
+      1: [],
+      2: [],
+      3: [],
+      4: [],
+      5: [],
+      6: [],
+      7: [],
+      8: [],
+      9: []
+    };
 
     // Iterate through items, allocating to containers
     // let totalWeight = 0;
@@ -74,7 +86,13 @@ export class RenaissanceCreatureSheet extends ActorSheet {
     }
 
     // Assign and return
+    actorData.gear = gear;
     actorData.skills = skills;
+    actorData.spells = spells;
+
+    actorData.weapons = actorData.gear.filter( function (e) {
+      return e.type === "weapon"
+    });
 
     actorData.data.combatOrder = actorData.data.abilities.dex.value;
     this.actor.setTurnOrder(actorData.data.abilities.dex.value);

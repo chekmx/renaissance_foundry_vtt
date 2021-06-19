@@ -7,7 +7,7 @@ export async function rollWeapon(actor, item, roll, token) {
     let skill = actor.items.filter((i) => i.data.type === "skill" && i.data.name === itemData.skill)[0];
 
     let damageRoll = "";
-    if(skill.name != "Gun Combat" && skill.name != "Ranged Combat" && skill.name != "Ranged Combat(Bows)"){
+    if(hasDamageModifier(skill)){
       damageRoll = new Roll(itemData.damage + actor.data.data.damageModifier, actor.data);
     } else {
       damageRoll = new Roll(itemData.damage, actor.data);
@@ -15,7 +15,6 @@ export async function rollWeapon(actor, item, roll, token) {
 
     damageRoll.evaluate();
 
-    console.log(damageRoll);
     let successDisplay = D100Roll(roll, skill.data)
 
     const template = `systems/renaissance/templates/chat/weapon-card.html`;
@@ -24,6 +23,7 @@ export async function rollWeapon(actor, item, roll, token) {
       actor: actor,
       tokenId: token ? `${token.scene._id}.${token.id}` : null,
       success: successDisplay,
+      
       skillData: skill.data,
       item: item,
       roll: roll,
@@ -44,4 +44,8 @@ export async function rollWeapon(actor, item, roll, token) {
     });
 
 
+}
+
+function hasDamageModifier(skill) {
+  return skill.name != "Gun Combat" && skill.name != "Ranged Combat" && skill.name != "Ranged Combat(Bows)";
 }
