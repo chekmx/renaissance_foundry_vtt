@@ -67,7 +67,7 @@
   "primaryTokenAttribute": "health",
   "secondaryTokenAttribute": "power",
   "url": "https://github.com/chekmx/renaissance_foundry_vtt",
-  "manifest": "",
+  "manifest": "https://github.com/chekmx/renaissance_foundry_vtt/blob/master/system.json",
   "download": "",
   "license": "LICENSE.txt"
 }
