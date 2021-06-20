@@ -8,8 +8,8 @@ export class RenaissanceWeaponItemSheet extends ItemSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["renaissance", "sheet", "weapon"],
-      width: 520,
-      height: 480,
+      width: 620,
+      height: 580,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }],
       template:  "systems/renaissance/templates/item/item-weapon-sheet.html"
     });

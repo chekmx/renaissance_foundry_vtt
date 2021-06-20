@@ -35,6 +35,24 @@
       "system": "renaissance",
       "path": "./packs/bestiary.db",
       "entity": "Actor"
+    },{
+      "name": "closeCombatWeapons",
+      "label": "Close Combat Weapons",
+      "system": "renaissance",
+      "path": "./packs/close-combat-weapons.db",
+      "entity": "Item"
+    },{
+      "name": "blackPowderWeapons",
+      "label": "Black Powder Weapons",
+      "system": "renaissance",
+      "path": "./packs/black-powder-weapons.db",
+      "entity": "Item"
+    },{
+      "name": "rangedWeapons",
+      "label": "Ranged Weapons",
+      "system": "renaissance",
+      "path": "./packs/ranged-weapons.db",
+      "entity": "Item"
     }
   ],
   "languages": [
