@@ -1,8 +1,23 @@
 import { D100Roll } from "./D100Roll.js";
 
-export async function rollWeapon(actor, item, roll, token) {
+export async function rollWeapon(actor, item, token) {
 
     const itemData = item.data;
+    const actorData = actor ? actor.data.data : {};
+
+    let modifier = 0;
+    let reason = "";
+    if(actor.data.data.abilities.str.value < item.data.minimumStr) {
+      reason = `${item.name} requires ${item.data.minimumStr} strength`
+      modifier = -20;
+    }
+    if (actor.data.data.abilities.dex.value < item.data.minimumDex){
+      reason = `${item.name} requires ${item.data.minimumDex} dexterity`
+      modifier = -20;
+    }
+
+    let roll = new Roll('1d100', actorData);
+    roll.evaluate();  
 
     let skill = actor.items.filter((i) => i.data.type === "skill" && i.data.name === itemData.skill)[0];
 
@@ -13,11 +28,9 @@ export async function rollWeapon(actor, item, roll, token) {
       damageRoll = new Roll(itemData.damage, actor.data);
     }
 
-    console.log(actor.data.data.abilities.str.value);
-    console.log(skill);
     damageRoll.evaluate();
 
-    let successDisplay = D100Roll(roll, skill.data)
+    let successDisplay = D100Roll(roll, skill.data, modifier)
 
     const template = `systems/renaissance/templates/chat/weapon-card.html`;
 
@@ -25,7 +38,7 @@ export async function rollWeapon(actor, item, roll, token) {
       actor: actor,
       tokenId: token ? `${token.scene._id}.${token.id}` : null,
       success: successDisplay,
-      
+      modifier: { "reason": reason, "value" : modifier },
       skillData: skill.data,
       item: item,
       roll: roll,

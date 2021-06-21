@@ -1,8 +1,12 @@
 import { D100Roll } from "./D100Roll.js";
 
-export async function rollSpell(actor, item, roll, token) {
+export async function rollSpell(actor, item, token) {
 
     const itemData = item.data;
+    const actorData = actor ? actor.data.data : {};
+
+    let roll = new Roll('1d100', actorData);
+    roll.evaluate(); 
 
     let skill = actor.items.filter((i) => i.data.type === "skill").filter((i) => i.data.name === itemData.skill)[0];
 
