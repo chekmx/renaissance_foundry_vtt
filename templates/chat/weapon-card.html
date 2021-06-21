@@ -12,10 +12,22 @@
               <section class="tooltip-part">
                 <div class="skill"> 
                     <header class="part-header flexrow">
-                        <span class="part-formula">{{skillData.name}}</span>             
-                        <span class="part-total">{{skillData.data.value}}</span>
+                        <span class="part-formula">{{skillData.name}}</span>           
+                        <span class="part-total">{{target}}</span>
                     </header>
                 </div>
+                {{#if modifier.reason}}
+                <div class="dice">
+                  <header class="part-header flexrow">
+                    <span class="part-formula">Skill</span>           
+                    <span class="part-total">{{skillData.data.value}}</span>
+                  </header>
+                  <header class="part-header flexrow">
+                      <span class="part-formula" style="color: red;" >{{modifier.reason}}</span>             
+                      <span class="part-total" style="color: red;">{{modifier.value}}</span>
+                  </header> 
+                </div>
+                {{/if}}  
                 <div class="dice">
                     <header class="part-header flexrow">
                         <span class="part-formula">{{roll.formula}}</span>             
@@ -24,9 +36,10 @@
                 </div>
               </section>
             </div>
-            <h4 class="dice-total">{{success}}</h4>
+            <h4 class="dice-total">{{success.text}}</h4>
         </div>
         
+        {{#if success.isSuccess}}
         <div class="dice-result">
             <div class="dice-tooltip">
               <section class="tooltip-part">
@@ -47,6 +60,7 @@
             </div>
             <h4 class="dice-total">Damage: {{damageRoll.total}}</h4>
         </div>
+        {{/if}} 
     </div>
     </class>
 </div>

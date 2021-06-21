@@ -38,17 +38,13 @@ export class RenaissanceItem extends Item {
     // Basic template rendering data
     const token = this.actor.token;
     const item = this.data;
-    const actorData = this.actor ? this.actor.data.data : {};
-
-    let roll = new Roll('1d100', actorData);
-    roll.evaluate();  
 
     if(item.type == "weapon"){
-      await rollWeapon(this.actor, item, roll, token);
+      await rollWeapon(this.actor, item, token);
     } else if (item.type == "spell") {
-      await rollSpell(this.actor, item, roll, token)
+      await rollSpell(this.actor, item, token)
     } else {
-      await rollSkill(this.actor, item, roll, token)
+      await rollSkill(this.actor, item, token)
     }
   }
 }
