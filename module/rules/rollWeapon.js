@@ -21,23 +21,27 @@ export async function rollWeapon(actor, item, token) {
 
     let skill = actor.items.filter((i) => i.data.type === "skill" && i.data.name === itemData.skill)[0];
 
-    let damageRoll = "";
-    if(hasDamageModifier(skill)){
-      damageRoll = new Roll(itemData.damage + actor.data.data.damageModifier, actor.data);
-    } else {
-      damageRoll = new Roll(itemData.damage, actor.data);
-    }
-
-    damageRoll.evaluate();
-
     let successDisplay = D100Roll(roll, skill.data, modifier)
+    let isSuccess = (successDisplay != "FAIL" && successDisplay != "FUMBLE")
 
+    let damageRoll = {};
+    if(isSuccess)
+    {
+      if(hasDamageModifier(skill)){
+        damageRoll = new Roll(itemData.damage + actor.data.data.damageModifier, actor.data);
+      } else {
+        damageRoll = new Roll(itemData.damage, actor.data);
+      }
+      damageRoll.evaluate();
+    }
+    
     const template = `systems/renaissance/templates/chat/weapon-card.html`;
 
     let templateData = {
       actor: actor,
       tokenId: token ? `${token.scene._id}.${token.id}` : null,
-      success: successDisplay,
+      success: { "text" : successDisplay, "isSuccess": isSuccess },
+      target: skill.data.data.value + modifier,
       modifier: { "reason": reason, "value" : modifier },
       skillData: skill.data,
       item: item,
@@ -47,7 +51,10 @@ export async function rollWeapon(actor, item, token) {
 
     if (game.dice3d) {
       await game.dice3d.showForRoll(roll, game.user, true);
-      await game.dice3d.showForRoll(damageRoll, game.user, true);
+      if(isSuccess)
+      {
+        await game.dice3d.showForRoll(damageRoll, game.user, true);
+      }
     }
 
     await renderTemplate(template, templateData).then(content => {
