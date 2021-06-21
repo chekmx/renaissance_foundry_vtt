@@ -1,3 +1,4 @@
+import { getBaseSkill } from '../rules/getBaseSkill.js'
 /**
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
@@ -22,6 +23,9 @@ export class RenaissanceSkillItemSheet extends ItemSheet {
     const data = super.getData();
     let abilities = { Str : "Strength", Con : "Constitution", Siz : "Size", Int: "Intelligence", Pow :"Power", Dex :"Dexterity", Cha :"Charisma"};
     data.abilities = abilities;
+    if(data.data.value == null || data.data.value == 0){
+      data.data.value = data.data.baseSkill
+    }
     return data;
   }
 

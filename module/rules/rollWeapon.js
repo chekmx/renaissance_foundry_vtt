@@ -13,6 +13,8 @@ export async function rollWeapon(actor, item, roll, token) {
       damageRoll = new Roll(itemData.damage, actor.data);
     }
 
+    console.log(actor.data.data.abilities.str.value);
+    console.log(skill);
     damageRoll.evaluate();
 
     let successDisplay = D100Roll(roll, skill.data)
