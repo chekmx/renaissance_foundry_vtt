@@ -32,7 +32,15 @@ export async function rollWeapon(actor, item, token) {
       } else {
         damageRoll = new Roll(itemData.damage, actor.data);
       }
-      damageRoll.evaluate();
+
+      if(successDisplay =="CRITICAL"){
+        if(actor.data.data.damageModifier.trim().startsWith("-")){
+          damageRoll = new Roll(itemData.damage, actor.data);
+        }
+        damageRoll.evaluate({maximize : true});
+      } else {
+        damageRoll.evaluate();
+      }
     }
     
     const template = `systems/renaissance/templates/chat/weapon-card.html`;
