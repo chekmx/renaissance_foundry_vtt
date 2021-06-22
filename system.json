@@ -30,12 +30,6 @@
       "path": "./packs/advanced-skills.db",
       "entity": "Item"
     },{
-      "name": "bestiary",
-      "label": "Bestiary",
-      "system": "renaissance",
-      "path": "./packs/bestiary.db",
-      "entity": "Actor"
-    },{
       "name": "closeCombatWeapons",
       "label": "Close Combat Weapons",
       "system": "renaissance",
@@ -53,6 +47,18 @@
       "system": "renaissance",
       "path": "./packs/ranged-weapons.db",
       "entity": "Item"
+    },{
+      "name": "bestiary",
+      "label": "Bestiary",
+      "system": "renaissance",
+      "path": "./packs/bestiary.db",
+      "entity": "Actor"
+    },{
+      "name": "fumbles",
+      "label": "Fumble Tables",
+      "system": "renaissance",
+      "path": "./packs/fumbles.db",
+      "entity": "RollTable"
     }
   ],
   "languages": [
