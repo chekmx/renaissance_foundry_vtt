@@ -236,4 +236,16 @@ export class RenaissanceCharacterSheet extends ActorSheet {
     //return new TraitSelector(this.actor, options).render(true)
   }
 
+  async _updateObject(event, formData){
+    super._updateObject(event, formData)
+    if(event.currentTarget){
+      if(event.currentTarget.classList.contains('input-skill-edit')){
+        //console.log(event.currentTarget.closest('.item').dataset)
+        const item = this.actor.getOwnedItem(event.currentTarget.closest('.item').dataset.itemId)
+        //console.log(event.currentTarget.value)
+        item.update({'data.value': event.currentTarget.value})
+      }
+    }
+  }
+
 }
