@@ -37,11 +37,11 @@
           </div>
           <div class="ability flexrow flex-group-center">
             <label for="armour" class="resource-label">Armour</label>
-            <label>{{actor.currentArmour.name}}</label>
+            <input type="text" name="data.armour.name" value="{{data.armour.name}}" data-dtype="String" />
           </div>
           <div class="ability flexrow flex-group-center">
-            <label>AP:</label>
-            <label>{{actor.currentArmour.data.points}} / {{actor.currentArmour.data.gunPoints}}</label>
+            <label>AP:</label> 
+            <input type="text" name="data.armour.points" value="{{data.armour.points}}" data-dtype="Number" /> /  <label>{{data.armour.gunpoints}}</label>
           </div>
           <div class="ability flexrow flex-group-center">
             <label>Order</label>
@@ -115,7 +115,7 @@
                     <div class="item-image rollable" data-roll="d100+{{@data.value}}" data-label="{{@skill.name}}"><img
                         src="{{skill.img}}" title="{{skill.name}}" width="24" height="24" /></div>
                     <h4 class="item-name">{{skill.name}}</h4>
-                    <div class="item-base"><label>{{data.value}}</label></div>
+                    <class class="item-base"><input class="input-skill-edit" type="text" name="skill.data.value" value="{{skill.data.value}}" data-dtype="Number" /></class>
                     <div class="item-controls">
                       <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                       <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>

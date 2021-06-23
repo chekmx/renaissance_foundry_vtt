@@ -84,7 +84,7 @@ export class RenaissanceCreatureSheet extends ActorSheet {
         skills.push(i);
       }
     }
-
+    actorData.data.armour.gunpoints = Math.floor(actorData.data.armour.points / 2);
     // Assign and return
     actorData.gear = gear;
     actorData.skills = skills;
@@ -178,4 +178,15 @@ export class RenaissanceCreatureSheet extends ActorSheet {
     return item.roll();
   }
 
+  async _updateObject(event, formData){
+    super._updateObject(event, formData)
+    if(event.currentTarget){
+      if(event.currentTarget.classList.contains('input-skill-edit')){
+        //console.log(event.currentTarget.closest('.item').dataset)
+        const item = this.actor.getOwnedItem(event.currentTarget.closest('.item').dataset.itemId)
+        //console.log(event.currentTarget.value)
+        item.update({'data.value': event.currentTarget.value})
+      }
+    }
+  }
 }
