@@ -21,7 +21,17 @@ export async function rollWeapon(actor, item, token) {
 
     let skill = actor.items.filter((i) => i.data.type === "skill" && i.data.name === itemData.skill)[0];
 
-    let successDisplay = D100Roll(roll, skill.data, modifier)
+    //Handle case if proper skill or id funky hack for creatures
+    let successDisplay = ""
+    let target = ""
+    if(skill) {
+      successDisplay = D100Roll(roll, skill.data.data.value, modifier)
+      target = skill.data.data.value + modifier
+    } else {
+      successDisplay = D100Roll(roll, item.data.skill, modifier)
+      target = parseInt(item.data.skill) + parseInt(modifier)
+    }
+
     let isSuccess = (successDisplay != "FAIL" && successDisplay != "FUMBLE")
 
     let damageRoll = {};
@@ -33,14 +43,17 @@ export async function rollWeapon(actor, item, token) {
         damageRoll = new Roll(itemData.damage, actor.data);
       }
 
-      if(successDisplay =="CRITICAL"){
-        if(actor.data.data.damageModifier.trim().startsWith("-")){
-          damageRoll = new Roll(itemData.damage, actor.data);
+      if(Roll.validate(itemData.damage))
+      {
+        if(successDisplay =="CRITICAL"){
+          if(actor.data.data.damageModifier.trim().startsWith("-")){
+            damageRoll = new Roll(itemData.damage, actor.data);
+          }
+          damageRoll.evaluate({maximize : true});
+        } else {
+          damageRoll.evaluate();
         }
-        damageRoll.evaluate({maximize : true});
-      } else {
-        damageRoll.evaluate();
-      }
+      } 
     }
     
     const template = `systems/renaissance/templates/chat/weapon-card.html`;
@@ -49,9 +62,9 @@ export async function rollWeapon(actor, item, token) {
       actor: actor,
       tokenId: token ? `${token.scene._id}.${token.id}` : null,
       success: { "text" : successDisplay, "isSuccess": isSuccess },
-      target: skill.data.data.value + modifier,
+      target: target,
       modifier: { "reason": reason, "value" : modifier },
-      skillData: skill.data,
+      skillData: (skill) ? skill.data : { name: item.name , data : { value: item.name}},
       item: item,
       roll: roll,
       damageRoll: damageRoll
@@ -77,5 +90,6 @@ export async function rollWeapon(actor, item, token) {
 }
 
 function hasDamageModifier(skill) {
+  if(!skill) return true
   return skill.name != "Gun Combat" && skill.name != "Ranged Combat" && skill.name != "Ranged Combat(Bows)";
 }
