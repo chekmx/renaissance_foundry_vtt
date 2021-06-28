@@ -8,8 +8,8 @@ export class RenaissanceSpellItemSheet extends ItemSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["renaissance", "sheet", "spell"],
-      width: 520,
-      height: 480,
+      width: 750,
+      height: 550,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }],
       template:  "systems/renaissance/templates/item/item-spell-sheet.html"
     });
