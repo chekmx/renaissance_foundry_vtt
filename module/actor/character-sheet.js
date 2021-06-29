@@ -237,7 +237,6 @@ export class RenaissanceCharacterSheet extends ActorSheet {
   }
 
   async _updateObject(event, formData){
-    super._updateObject(event, formData)
     if(event.currentTarget){
       if(event.currentTarget.classList.contains('input-skill-edit')){
         //console.log(event.currentTarget.closest('.item').dataset)
@@ -246,6 +245,8 @@ export class RenaissanceCharacterSheet extends ActorSheet {
         item.update({'data.value': event.currentTarget.value})
       }
     }
+
+    return super._updateObject(event, formData)
   }
 
 }

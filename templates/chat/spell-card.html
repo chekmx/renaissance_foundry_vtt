@@ -4,7 +4,11 @@
       <img src="{{item.img}}" title="{{item.name}}" width="36" height="36"/>
     </header>
     <class class="card-content">
-      <div class="description resource-label">{{actor.data.name}} has cast the spell {{item.name}}</div>
+      <div class="description resource-label">{{actor.data.name}} has cast the spell</div> 
+      <div><b>{{item.name}}</b></div>
+      <hr size="8" width="90%" color="grey">
+      <div><i>{{item.data.tags}}</i></div>
+      {{{item.data.description}}}
       <div class="dice-roll">
         
         <div class="dice-result">
