@@ -25,7 +25,8 @@ export class RenaissanceWeaponItemSheet extends ItemSheet {
        "Close Combat (Polearms)" : "Close Combat (Polearms)",
         "Gun Combat":  "Gun Combat",
         "Ranged Combat": "Ranged Combat",
-        "Ranged Combat (Bow)" :  "Ranged Combat (Bow)" };
+        "Ranged Combat (Bow)" :  "Ranged Combat (Bow)",
+        "Unarmed Combat" : "Unarmed Combat" };
     let combatSizes = { "S" : "S", "M" : "M", "L" : "L", "H" : "H" }
     data.combatSkills = combatSkills;
     data.combatSizes = combatSizes;

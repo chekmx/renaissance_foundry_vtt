@@ -20,6 +20,22 @@ export class RenaissanceSpellItemSheet extends ItemSheet {
   /** @override */
   getData() {
     const data = super.getData();
+    let spellSkills = { 
+      "Elemental Casting (Air)" : "Elemental Casting (Air)",
+      "Elemental Casting (Earth)" : "Elemental Casting (Earth)",
+      "Elemental Casting (Fire)" : "Elemental Casting (Fire)",
+      "Elemental Casting (Water)" : "Elemental Casting (Water)",
+      "Witchcraft" :  "Witchcraft" };
+
+    let resistances = {
+      "" : "",
+      "Dodge" : "Dodge",
+      "Persistence" : "Persistence",
+      "Resilience" : "Resilience",
+    }
+
+    data.resistances = resistances
+    data.spellSkills = spellSkills
     return data;
   }
 
