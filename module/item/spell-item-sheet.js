@@ -8,8 +8,8 @@ export class RenaissanceSpellItemSheet extends ItemSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["renaissance", "sheet", "spell"],
-      width: 520,
-      height: 480,
+      width: 750,
+      height: 550,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }],
       template:  "systems/renaissance/templates/item/item-spell-sheet.html"
     });
@@ -20,6 +20,22 @@ export class RenaissanceSpellItemSheet extends ItemSheet {
   /** @override */
   getData() {
     const data = super.getData();
+    let spellSkills = { 
+      "Elemental Casting (Air)" : "Elemental Casting (Air)",
+      "Elemental Casting (Earth)" : "Elemental Casting (Earth)",
+      "Elemental Casting (Fire)" : "Elemental Casting (Fire)",
+      "Elemental Casting (Water)" : "Elemental Casting (Water)",
+      "Witchcraft" :  "Witchcraft" };
+
+    let resistances = {
+      "" : "",
+      "Dodge" : "Dodge",
+      "Persistence" : "Persistence",
+      "Resilience" : "Resilience",
+    }
+
+    data.resistances = resistances
+    data.spellSkills = spellSkills
     return data;
   }
 

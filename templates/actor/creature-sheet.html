@@ -89,9 +89,9 @@
                   <li class="item flexrow" data-item-id="{{item._id}}">
                     <div class="item-image rollable" data-roll="d100+{{@data.skill}}" data-label="{{@item.name}}"><img
                         src="{{item.img}}" title="{{item.name}}" width="24" height="24" /></div>
-                    <h4 class="item-name">{{item.name}}</h4>
-                    <div class="item-base"><label>{{data.skill}}</label></div>
-                    <div class="item-base"><label>{{data.damage}}</label></div>
+                    <h4 class="item-base"><input class="input-weapon-name" type="text" name="item.name" value="{{item.name}}" data-dtype="Number" /></h4>
+                    <class class="item-base"><input class="input-weapon-skill" type="text" name="item.data.skill" value="{{item.data.skill}}" data-dtype="Number" /></class>
+                    <class class="item-base"><input class="input-weapon-damage" type="text" name="item.data.damage" value="{{item.data.damage}}" data-dtype="String" /></class>
                     <div class="item-controls">
                       <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                       <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>

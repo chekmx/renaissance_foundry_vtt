@@ -250,7 +250,7 @@
                     <div class="item-image rollable" data-roll="d100+{{@data.value}}" data-label="{{@skill.name}}"><img src="{{skill.img}}" title="{{skill.name}}" width="24" height="24"/></div>
                     <h4 class="item-name">{{skill.name}}</h4>
                     <div class="item-base"><label>{{data.base1}} & {{data.base2}}</label> <label>{{data.baseSkill}}</label></div>
-                    <div class="item-base"><label>{{data.value}}</label></div>
+                    <class class="item-base"><input class="input-skill-edit" type="text" name="skill.data.value" value="{{skill.data.value}}" data-dtype="Number" /></class>
                     <div class="item-controls">
                         <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
                         <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>

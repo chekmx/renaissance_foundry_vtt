@@ -8,7 +8,7 @@ export async function rollSkill(actor, item, token) {
     let roll = new Roll('1d100', actorData);
     roll.evaluate(); 
 
-    let successDisplay = D100Roll(roll, item);
+    let successDisplay = D100Roll(roll, item.data.value);
 
     let chatData = {
       type: CHAT_MESSAGE_TYPES.ROLL,

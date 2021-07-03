@@ -41,22 +41,26 @@
 
                     <div class="resource" flex-group-center>
                         <div class="ability flexrow flex-group-center">
-                            <Magnitude class="resource-label">Magnitude</label>
+                            <label class="resource-label">Magnitude</label>
                             <input type="text" name="data.magnitude" value="{{data.magnitude}}" data-dtype="Number"/>
                         </div>
                     </div>
 
                     <div class="resource" flex-group-center>
                         <div class="ability flexrow flex-group-center">
-                            <Magnitude class="resource-label">Resist</label>
-                            <input type="text" name="data.resist" value="{{data.resist}}" data-dtype="String"/>
+                            <label class="resource-label">Resist</label>
+                            <select name="data.resist" data-type="String">
+                                {{selectOptions resistances selected=data.resist}}
+                            </select>
                         </div>
                     </div>
 
                     <div class="resource" flex-group-center>
                         <div class="ability flexrow flex-group-center">
-                            <Magnitude class="resource-label">Skill</label>
-                            <input type="text" name="data.skill" value="{{data.skill}}" data-dtype="String"/>
+                            <label class="resource-label">Skill</label>
+                            <select name="data.skill" data-type="String">
+                                {{selectOptions spellSkills selected=data.skill}}
+                            </select>
                         </div>
                     </div>
                 </div>

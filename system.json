@@ -48,6 +48,18 @@
       "path": "./packs/ranged-weapons.db",
       "entity": "Item"
     },{
+      "name": "alchemySpells",
+      "label": "Alchemical Spells ",
+      "system": "renaissance",
+      "path": "./packs/alchemy-spells.db",
+      "entity": "Item"
+    },{
+      "name": "witchcraftSpells",
+      "label": "Witchcraft Spells ",
+      "system": "renaissance",
+      "path": "./packs/witchcraft-spells.db",
+      "entity": "Item"
+    },{
       "name": "bestiary",
       "label": "Bestiary",
       "system": "renaissance",
