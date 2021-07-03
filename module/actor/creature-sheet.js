@@ -210,5 +210,6 @@ export class RenaissanceCreatureSheet extends ActorSheet {
     }
 
     return super._updateObject(event, formData)
+    }
   }
 }
