@@ -6,3 +6,6 @@ This system is a renaissance system for playing the RGP on Foundry VTT
 
 Install via you foundry application
 
+To create the zip file use 
+
+npm run pack
