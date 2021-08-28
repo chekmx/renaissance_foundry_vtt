@@ -23,3 +23,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
       - run: npm run pack
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist-without-markdown
+          path: |
+            /home/runner/work/renaissance_foundry_vtt/renaissance_foundry_vtt
