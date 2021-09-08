@@ -1,0 +1,19 @@
+---
+name: "tagged-release"
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  tagged-release:
+    name: "Tagged Release"
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: /home/runner/work/renaissance_foundry_vtt/renaissance_foundry_vtt
+          prerelease: false
