@@ -19,7 +19,13 @@ export class RenaissanceWeaponItemSheet extends ItemSheet {
 
   /** @override */
   getData() {
-    const data = super.getData();
+    const baseData = super.getData();
+    let sheetData={
+      owner: this.item.isOwner,
+      editable: this.isEditable,
+      item: baseData.item,
+      data: baseData.item.data.data
+    }
     let combatSkills = { 
       "Close Combat" : "Close Combat",
        "Close Combat (Polearms)" : "Close Combat (Polearms)",
@@ -28,9 +34,9 @@ export class RenaissanceWeaponItemSheet extends ItemSheet {
         "Ranged Combat (Bow)" :  "Ranged Combat (Bow)",
         "Unarmed Combat" : "Unarmed Combat" };
     let combatSizes = { "S" : "S", "M" : "M", "L" : "L", "H" : "H" }
-    data.combatSkills = combatSkills;
-    data.combatSizes = combatSizes;
-    return data;
+    sheetData.combatSkills = combatSkills;
+    sheetData.combatSizes = combatSizes;
+    return sheetData;
   }
 
   /* -------------------------------------------- */

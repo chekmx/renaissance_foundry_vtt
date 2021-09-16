@@ -29,8 +29,8 @@ Hooks.once('init', async function() {
 
 
   // Define custom Entity classes
-  CONFIG.Actor.entityClass = RenaissanceActor;
-  CONFIG.Item.entityClass = RenaissanceItem;
+  CONFIG.Actor.documentClass = RenaissanceActor;
+  CONFIG.Item.documentClass = RenaissanceItem;
   CONFIG.time.roundTime = 5;
 
   // Register sheet application classes

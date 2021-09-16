@@ -54,7 +54,6 @@
       "family" : "",
       "connections": "",
       "politics": "",
-      "orderTypes": ["Combat", "Spell"],
       "orderType": "",
       "sanity": {
         "value": 5,

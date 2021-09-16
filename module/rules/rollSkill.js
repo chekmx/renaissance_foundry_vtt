@@ -6,13 +6,13 @@ export async function rollSkill(actor, item, token) {
     const actorData = actor ? actor.data.data : {};
 
     let roll = new Roll('1d100', actorData);
-    roll.evaluate(); 
+    await roll({ async: true}).evaluate(); 
 
     let successDisplay = D100Roll(roll, item.data.value);
 
     let chatData = {
       type: CHAT_MESSAGE_TYPES.ROLL,
-      user: game.user._id,
+      user: game.user.id,
       speaker: ChatMessage.getSpeaker({ actor: actor }),
       roll: roll,
       rollMode: game.settings.get("core", "rollMode")

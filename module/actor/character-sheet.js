@@ -30,17 +30,26 @@ export class RenaissanceCharacterSheet extends ActorSheet {
 
   /** @override */
   getData() {
-    const data = super.getData();
-    data.dtypes = ["String", "Number", "Boolean"];
+    const baseData = super.getData();
+    let sheetData={
+      owner: this.actor.isOwner,
+      editable: this.isEditable,
+      actor: baseData.actor,
+      items: baseData.items,
+      data: baseData.actor.data.data
+    }
+    sheetData.dtypes = ["String", "Number", "Boolean"];
 
     // Prepare items.
     if (this.actor.data.type == 'character') {
-      for (let attr of Object.values(data.data.attributes)) {
+      for (let attr of Object.values(sheetData.data.attributes)) {
         attr.isCheckbox = attr.dtype === "Boolean";
       }
     }
-    this._prepareCharacterItems(data);
-    return data;
+    let orderTypes = { 0: "Combat", 1: "Spell" }
+    sheetData.orderTypes = orderTypes
+    this._prepareCharacterItems(sheetData);
+    return sheetData;
   }
 
   /**
@@ -100,7 +109,8 @@ export class RenaissanceCharacterSheet extends ActorSheet {
     actorData.skills = skills;
     actorData.spells = spells;
 
-    let baseMagick =  Math.ceil((actorData.data.abilities.int.value + actorData.data.abilities.pow.value) / 10);
+    console.log(actorData);
+    let baseMagick =  Math.ceil((actorData.data.data.abilities.int.value + actorData.data.data.abilities.pow.value) / 10);
 
     if(baseMagick > actorData.data.magick || actorData.data.magick == undefined){
       actorData.data.magick = baseMagick;
@@ -115,18 +125,18 @@ export class RenaissanceCharacterSheet extends ActorSheet {
     });
 
     if(actorData.currentArmour){
-      actorData.combatOrder = actorData.data.abilities.dex.value - actorData.currentArmour.data.points;
-      actorData.spellOrder = actorData.data.abilities.int.value - actorData.currentArmour.data.points;
+      actorData.combatOrder = actorData.data.data.abilities.dex.value - actorData.currentArmour.data.points;
+      actorData.spellOrder = actorData.data.data.abilities.int.value - actorData.currentArmour.data.points;
     } else {
-      actorData.combatOrder = actorData.data.abilities.dex.value;
-      actorData.spellOrder = actorData.data.abilities.int.value ;
+      actorData.combatOrder = actorData.data.data.abilities.dex.value;
+      actorData.spellOrder = actorData.data.data.abilities.int.value ;
     }
-    if(actorData.data.orderType == "0") {
-      //console.log(`use combat order ${actorData.combatOrder}`);
+    if(actorData.data.data.orderType == "0") {
+      console.log(`use combat order ${actorData.combatOrder}`);
       actorData.data.combatOrder = actorData.combatOrder;
       
     } else {
-      //console.log(`use spell order ${actorData.spellOrder}`);
+      console.log(`use spell order ${actorData.spellOrder}`);
       actorData.data.combatOrder = actorData.spellOrder;    
     }
     this.actor.setTurnOrder(actorData.data.combatOrder);
@@ -147,20 +157,20 @@ export class RenaissanceCharacterSheet extends ActorSheet {
     // Update Inventory Item
     html.find('.item-edit').click(ev => {
       const li = $(ev.currentTarget).parents(".item");
-      const item = this.actor.getOwnedItem(li.data("itemId"));
+      const item = this.actor.items.get(li.data("itemId"));
       item.sheet.render(true);
     });
 
     // html.find('.item-update').change( ev =>{
     //   const li = $(ev.currentTarget).parents(".item");
     //   console.log(li);
-    //   const item = this.actor.getOwnedItem(li.data("itemId"));
+    //   const item = this.actor.items.get(li.data("itemId"));
     // });
 
     // Delete Inventory Item
     html.find('.item-delete').click(ev => {
       const li = $(ev.currentTarget).parents(".item");
-      this.actor.deleteOwnedItem(li.data("itemId"));
+      this.actor.deleteEmbeddedDocuments("Item", [li.data("itemId")]);
       li.slideUp(200, () => this.render(false));
     });
 
@@ -172,7 +182,7 @@ export class RenaissanceCharacterSheet extends ActorSheet {
     html.find('.order-selector').click(this._onOrderSelector.bind(this));
 
     // Drag events for macros.
-    if (this.actor.owner) {
+    if (this.actor.isOwner) {
       let handler = ev => this._onDragStart(ev);
       html.find('li.item').each((i, li) => {
         if (li.classList.contains("inventory-header")) return;
@@ -206,7 +216,7 @@ export class RenaissanceCharacterSheet extends ActorSheet {
     delete itemData.data["type"];
 
     // Finally, create the item!
-    return this.actor.createOwnedItem(itemData);
+    return this.actor.createEmbeddedDocuments("Item", [itemData]);
   }
 
   /**
@@ -218,7 +228,7 @@ export class RenaissanceCharacterSheet extends ActorSheet {
 
     event.preventDefault();
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
-    const item = this.actor.getOwnedItem(itemId);
+    const item = this.actor.items.get(itemId);
     return item.roll();
   }
 
@@ -240,7 +250,7 @@ export class RenaissanceCharacterSheet extends ActorSheet {
     if(event.currentTarget){
       if(event.currentTarget.classList.contains('input-skill-edit')){
         //console.log(event.currentTarget.closest('.item').dataset)
-        const item = this.actor.getOwnedItem(event.currentTarget.closest('.item').dataset.itemId)
+        const item = this.actor.items.get(event.currentTarget.closest('.item').dataset.itemId)
         //console.log(event.currentTarget.value)
         item.update({'data.value': event.currentTarget.value})
       }

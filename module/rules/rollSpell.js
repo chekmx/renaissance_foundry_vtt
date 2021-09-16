@@ -14,7 +14,7 @@ export async function rollSpell(actor, item, token) {
 
     let chatData = {
       type: CHAT_MESSAGE_TYPES.ROLL,
-      user: game.user._id,
+      user: game.user.id,
       speaker: ChatMessage.getSpeaker({ actor: actor }),
       roll: roll,
       rollMode: game.settings.get("core", "rollMode")
