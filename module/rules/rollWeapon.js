@@ -27,9 +27,13 @@ export async function rollWeapon(actor, item, token) {
     if(skill) {
       successDisplay = D100Roll(roll, skill.data.data.value, modifier)
       target = skill.data.data.value + modifier
-    } else {
+    } else if(item.data.skill  && !isNaN(item.data.skill)) {
+      console.log("Used HACK!" + item.data.skill);
       successDisplay = D100Roll(roll, item.data.skill, modifier)
       target = parseInt(item.data.skill) + parseInt(modifier)
+    } else {
+      ui.notifications.info(`${actor.name} does not have skill ${itemData.skill}`);
+      return
     }
 
     let isSuccess = (successDisplay != "FAIL" && successDisplay != "FUMBLE")
