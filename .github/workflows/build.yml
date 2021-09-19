@@ -16,6 +16,8 @@ jobs:
         node-version: [13.x]
 
     steps:
+      - name: Free up 24GB of disk space
+        run: sudo rm -rf /usr/share/dotnet
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
