@@ -85,7 +85,7 @@ export class RenaissanceCharacterSheet extends ActorSheet {
       //let item = i.data;
       i.img = i.img || DEFAULT_TOKEN;
       // Append to gear.
-      if (i.type === 'item'  || i.type === 'armour'  || i.type === 'weapon') {
+      if (i.type === 'item'  || i.type === 'armour'  || i.type === 'melee weapon' || i.type === 'gun' || i.type === 'ranged weapon') {
         gear.push(i);
       }
       // Append to skills.
@@ -121,8 +121,18 @@ export class RenaissanceCharacterSheet extends ActorSheet {
     })[0];
 
     actorData.weapons = actorData.gear.filter( function (e) {
-      return e.type === "weapon"
+      return e.type === "melee weapon"
     });
+
+    actorData.guns = actorData.gear.filter( function (e) {
+      return e.type === 'gun' 
+    });
+
+    actorData.rangedWeapons = actorData.gear.filter( function (e) {
+      return e.type === 'ranged weapon'
+    });
+
+    console.log(actorData.guns)
 
     if(actorData.currentArmour){
       actorData.combatOrder = actorData.data.data.abilities.dex.value - actorData.currentArmour.data.points;
@@ -177,6 +187,7 @@ export class RenaissanceCharacterSheet extends ActorSheet {
     // Rollable abilities.
     html.find('.rollable').click(this._onRoll.bind(this));
 
+    html.find('.rollable-as-club').click(this._onRollAsClub.bind(this));
     // TO DO confirm if this is used  
     // combat-type selector 
     html.find('.order-selector').click(this._onOrderSelector.bind(this));
@@ -217,6 +228,13 @@ export class RenaissanceCharacterSheet extends ActorSheet {
 
     // Finally, create the item!
     return this.actor.createEmbeddedDocuments("Item", [itemData]);
+  }
+
+  _onRollAsClub(event) {
+    event.preventDefault();
+    const itemId = event.currentTarget.closest(".item").dataset.itemId;
+    const item = this.actor.items.get(itemId);
+    return item.roll(true);
   }
 
   /**

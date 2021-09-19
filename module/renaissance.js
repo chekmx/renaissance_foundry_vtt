@@ -4,7 +4,8 @@ import { RenaissanceCharacterSheet } from "./actor/character-sheet.js";
 import { RenaissanceCreatureSheet } from "./actor/creature-sheet.js"
 import { RenaissanceItem } from "./item/item.js";
 import { RenaissanceItemSheet } from "./item/item-sheet.js";
-import { RenaissanceWeaponItemSheet } from "./item/weapon-item-sheet.js"
+import { RenaissanceWeaponItemSheet } from "./item/melee-weapon-item-sheet.js"
+import { RenaissanceGunItemSheet } from "./item/gun-item-sheet.js"
 import { RenaissanceSpellItemSheet } from "./item/spell-item-sheet.js"
 import { RenaissanceSkillItemSheet } from "./item/skill-item-sheet.js"
 //import { _getInitiativeFormula } from "./module/combat.js";
@@ -40,7 +41,9 @@ Hooks.once('init', async function() {
   
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("renaissance", RenaissanceItemSheet, { types: ['item', "fatigue", "armour", "faction"], makeDefault: true });
-  Items.registerSheet("renaissance", RenaissanceWeaponItemSheet, { types: ['weapon'], makeDefault: true });
+  Items.registerSheet("renaissance", RenaissanceWeaponItemSheet, { types: ['melee weapon'], makeDefault: true });
+  Items.registerSheet("renaissance", RenaissanceGunItemSheet, { types: ['gun'], makeDefault: true });
+  Items.registerSheet("renaissance", RenaissanceGunItemSheet, { types: ['ranged weapon'], makeDefault: true });
   Items.registerSheet("renaissance", RenaissanceSpellItemSheet, { types: ['spell'], makeDefault: true });
   Items.registerSheet("renaissance", RenaissanceSkillItemSheet, { types: ['skill'], makeDefault: true });
   

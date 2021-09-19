@@ -2,16 +2,16 @@
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
  */
-export class RenaissanceWeaponItemSheet extends ItemSheet {
+export class RenaissanceGunItemSheet extends ItemSheet {
 
   /** @override */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      classes: ["renaissance", "sheet", "weapon"],
-      width: 620,
-      height: 580,
-      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }],
-      template:  "systems/renaissance/templates/item/item-weapon-sheet.html"
+      classes: ["renaissance", "sheet", "gun"],
+      width: 650,
+      height: 450,
+      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "attributes" }],
+      template:  "systems/renaissance/templates/item/item-gun-sheet.html"
     });
   }
 
@@ -27,12 +27,7 @@ export class RenaissanceWeaponItemSheet extends ItemSheet {
       data: baseData.item.data.data
     }
     let combatSkills = { 
-      "Close Combat" : "Close Combat",
-       "Close Combat (Polearms)" : "Close Combat (Polearms)",
-        "Gun Combat":  "Gun Combat",
-        "Ranged Combat": "Ranged Combat",
-        "Ranged Combat (Bow)" :  "Ranged Combat (Bow)",
-        "Unarmed Combat" : "Unarmed Combat" };
+        "Gun Combat":  "Gun Combat" };
     let combatSizes = { "S" : "S", "M" : "M", "L" : "L", "H" : "H" }
     sheetData.combatSkills = combatSkills;
     sheetData.combatSizes = combatSizes;

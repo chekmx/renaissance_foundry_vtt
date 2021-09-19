@@ -83,10 +83,23 @@
     }
   },
   "Item": {
-    "types": ["item", "skill", "spell", "fatigue", "weapon", "armour", "faction", "spellTraits"],
+    "types": ["item", "skill", "spell", "fatigue", "armour", "faction", "spellTraits", "melee weapon", "ranged weapon", "gun"],
     "templates": {
       "base": {
         "description": ""
+      },
+      "weapon": {
+        "skill": 0,
+        "size": "",
+        "damage": "",
+        "minimumStr": "",
+        "minimumDex": "",
+        "notes": "",
+        "encumberance": ""
+      },
+      "ranged": {
+        "range": "",
+        "load": ""
       }
     },
     "item": {
@@ -136,17 +149,15 @@
       "order": "0",
       "other": ""
     },
-    "weapon": {
-      "templates": ["item"],
-      "skill": 0,
-      "size": "",
-      "damage": "",
-      "minimumStr": "",
-      "minimumDex": "",
-      "notes": "",
-      "range": "",
-      "load": "",
-      "encumberance": ""
+    "melee weapon": {
+      "templates": ["weapon"]
+    },
+    "ranged weapon": {
+      "templates": ["weapon", "ranged"]
+    },
+    "gun": {
+      "templates": ["weapon",  "ranged"],
+      "clubDamage": ""
     },
     "faction": {
       "allies" :[],

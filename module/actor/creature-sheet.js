@@ -83,7 +83,7 @@ export class RenaissanceCreatureSheet extends ActorSheet {
       let item = i.data;
       i.img = i.img || DEFAULT_TOKEN;
       // Append to gear.
-      if (i.type === 'item'  || i.type === 'armour'  || i.type === 'weapon') {
+      if (i.type === 'item'  || i.type === 'armour'  || i.type === 'melee weapon') {
         gear.push(i);
       }
       // Append to skills.
@@ -98,7 +98,7 @@ export class RenaissanceCreatureSheet extends ActorSheet {
     actorData.spells = spells;
 
     actorData.weapons = actorData.gear.filter( function (e) {
-      return e.type === "weapon"
+      return e.type === "melee weapon"
     });
 
     actorData.data.combatOrder = actorData.data.data.abilities.dex.value;
