@@ -11,7 +11,7 @@ export class RenaissanceCharacterSheet extends ActorSheet {
       classes: ["renaissance", "sheet", "actor", "character"],
       width: 1200,
       height: 1000,
-      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
+      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "main" }]
     });
   }
 

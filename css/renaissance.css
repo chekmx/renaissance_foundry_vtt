@@ -86,14 +86,14 @@
   border: 1px solid #999;
 }
 
-.flex-group-left {
+.flex-left {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
-  justify-content: flex-start;
+  justify-content: left;
   text-align: left;
 }
 
-.flex-group-right {
+.flex-right {
   -webkit-box-pack: end;
   -ms-flex-pack: end;
   justify-content: flex-end;
@@ -242,6 +242,12 @@
 .renaissance .resource-label {
   font-family: "Meddon", cursive;
   font-weight: bold;
+  text-transform: capitalize;
+}
+
+.renaissance .resource-value {
+  font-family: "IM Fell DW Pica", serif;
+  font-size: large;
   text-transform: capitalize;
 }
 
