@@ -1,0 +1,94 @@
+{{!-- The grid classes are defined in scss/global/_grid.scss. To use,
+    use both the "grid" and "grid-Ncol" class where "N" can be any number
+    from 1 to 12 and will create that number of columns.  --}}
+    <div class="resources grid grid-3col">
+      <div>
+        {{#each data.abilities as |ability key|}}
+          <div class="ability flexrow flex-group-center">
+            <label for="data.abilities.{{key}}.value" class="resource-label">{{ability.fullname}}</label>
+            <input type="text" name="data.abilities.{{key}}.value" value="{{ability.value}}" data-dtype="Number"/>
+          </div>
+        {{/each}}
+        <div class="ability flexrow flex-group-center">
+          <label for="data.magick.value" class="resource-label">Magick</label>
+          <input type="text" name="data.magick" value="{{data.magick}}" data-dtype="Number"/>
+        </div>
+      </div>
+      <div  class="characteristics _grid">
+        <!-- <div class="resource flex-group-center">
+          <div class="resource-content flexrow flex-center flex-between">
+            <label for="data.health.value" class="resource-label">Health</label>
+            <span>   </span>
+            <input type="text" name="data.health.value" value="{{data.health.value}}" data-dtype="Number"/>
+            <span> / </span>
+            <label name="data.health.max">{{data.health.max}}</label>
+          </div>
+          <div class="ability flexrow flex-group-center">
+            <label>Major wound:</label>
+            <label>{{data.majorWoundLevel}}</label>
+          </div>
+        </div> -->
+        <div class="ability flexrow flex-group-center">
+          <label>Damage Modifier:</label>
+          <label>{{data.damageModifier}}</label>
+        </div>
+        <div class="ability flexrow flex-group-center">
+          <label class="resource-label">Order</label>
+        </div>
+        <!-- <div div class="ability flexrow flex-group-center">
+          <select name="data.orderType" data-type="Number">
+            {{selectOptions orderTypes selected=data.orderType}}
+          </select>
+          <input type="text" name="data.combatOrder" value="{{data.combatOrder}}" data-dtype="String">
+        </div> -->
+        <div class="ability flexrow flex-group-center">
+          <label>Movement:</label>
+          <label>{{data.movementRate}}</label>
+        </div>
+        <div class="ability flexrow flex-group-center">
+          <label class="resource-label">Experience</label>
+        </div>
+        <!-- <div class="ability flexrow flex-group-center">
+          <label>Hero Points:</label>
+          <input type="text" name="data.heropoints" value="{{data.heropoints}}" data-dtype="String"/>
+        </div> -->
+        <div class="ability flexrow flex-group-center">
+          <label>Improvement Points:</label>
+          <input type="text" name="data.improvementPoints" value="{{data.improvementPoints}}" data-dtype="String"/>
+        </div>
+      </div>
+      <div class="resource flex-group-center">
+        <div class="ability flexrow flex-group-center">
+          <label for="armour" class="resource-label">Armour</label>
+          <label>{{actor.currentArmour.name}}</label>
+        </div>
+        <div class="ability flexrow flex-group-center">
+          <label>AP:</label>
+          <label>{{actor.currentArmour.data.points}} / {{actor.currentArmour.data.gunPoints}}</label>
+        </div>
+        <div class="ability flexrow flex-group-center">
+          <label for="data.health.value" class="resource-label">Sanity</label>
+            <span>   </span>
+            <input type="text" name="data.sanity.value" value="{{data.sanity.value}}" data-dtype="Number"/>
+            <span> / </span>
+            <label name="data.sanity.max">{{data.sanity.value}}</label>
+        </div>
+        <div class="ability flexrow flex-group-center">
+          <label>Major Insanity:</label>
+          <label>{{data.majorInsanityLevel}}</label>
+        </div>
+        <label for="armour" class="resource-label">Righteousness</label>
+        <div class="ability flexrow flex-group-center">
+          <label>Righteousness Points:</label>
+          <input type="text" name="data.righteousnessPoints" value="{{data.righteousnessPoints}}" data-dtype="Number"/>
+        </div>
+        <div class="ability flexrow flex-group-center">
+          <label>Faction:</label>
+          <input type="text" name="data.faction" value="{{data.faction}}" data-dtype="String"/>
+        </div>
+        <div class="ability flexrow flex-group-center">
+          <label>Faction Zeal:</label>
+          <input type="text" name="data.factionZeal" value="{{data.factionZeal}}" data-dtype="Number"/>
+        </div>
+      </div>
+    </div>

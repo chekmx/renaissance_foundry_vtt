@@ -8,6 +8,7 @@ import { RenaissanceWeaponItemSheet } from "./item/melee-weapon-item-sheet.js"
 import { RenaissanceGunItemSheet } from "./item/gun-item-sheet.js"
 import { RenaissanceSpellItemSheet } from "./item/spell-item-sheet.js"
 import { RenaissanceSkillItemSheet } from "./item/skill-item-sheet.js"
+import { preloadHandlebarsTemplates } from "./template.js"
 //import { _getInitiativeFormula } from "./module/combat.js";
 
 Hooks.once('init', async function() {
@@ -62,6 +63,8 @@ Hooks.once('init', async function() {
   Handlebars.registerHelper('toLowerCase', function(str) {
     return str.toLowerCase();
   });
+
+  preloadHandlebarsTemplates();
 });
 
 Hooks.once("ready", async function() {
