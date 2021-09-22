@@ -12,6 +12,12 @@
   cursor: pointer;
 }
 
+.rollable-as-club:hover, .rollable:focus {
+  color: #000;
+  text-shadow: 0 0 10px red;
+  cursor: pointer;
+}
+
 .grid,
 .grid-2col {
   display: grid;

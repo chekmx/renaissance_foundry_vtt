@@ -105,11 +105,14 @@
         <br>
       {{/each}}
       {{#each actor.guns as |item id|}}
-        <span class="item rollable" data-roll="d100+{{@data.skill}}" data-label="{{@item.name}}" data-item-id="{{item._id}}" >{{item.name}} (Size: {{data.size}}, Damage:{{data.damage}});</span>
+        <span>{{item.name}} (Size: {{data.size}}, </span>
+        <span class="item rollable" data-roll="d100+{{@data.skill}}" data-label="{{@item.name}}" data-item-id="{{item._id}}" >Damage:{{data.damage}}, </span>
+        <span class="item rollable-as-club" data-roll="d100+{{@data.skill}}" data-label="{{@item.name}}-as-club" data-item-id="{{item._id}}" >Club Damage:{{data.clubDamage}}, </span>
+        <span>Range: {{data.range}}, Loading: {{data.load}})</span>
         <br>
       {{/each}}
       {{#each actor.rangedWeapons as |item id|}}
-        <span class="item rollable" data-roll="d100+{{@data.skill}}" data-label="{{@item.name}}" data-item-id="{{item._id}}" >{{item.name}} (Size: {{data.size}}, Damage:{{data.damage}});</span>
+        <span class="item rollable" data-roll="d100+{{@data.skill}}" data-label="{{@item.name}}" data-item-id="{{item._id}}" >{{item.name}} (Damage:{{data.damage}} Range: {{data.range}} Loading: {{data.load}})</span>
         <br>      
       {{/each}}
     </div>
