@@ -1,7 +1,7 @@
 import { rollWeapon } from '../rules/rollWeapon.js'
 import { rollSkill } from '../rules/rollSkill.js'
 import { rollSpell } from '../rules/rollSpell.js'
-import { getBaseSkill} from '../rules/getBaseSkill.js'
+//import { getBaseSkill} from '../rules/getBaseSkill.js'
 /**
  * Extend the basic Item with some very simple modifications.
  * @extends {Item}
@@ -21,12 +21,12 @@ export class RenaissanceItem extends Item {
       data.gunPoints = Math.floor(data.points / 2);
     }
     
-    if(itemData.type == "skill"){
-      data.baseSkill = getBaseSkill(actorData, itemData, data);
-      if( data.value == 0){
-        data.value = data.baseSkill
-      }
-    }
+    // if(itemData.type == "skill"){
+    //   data.baseSkill = getBaseSkill(actorData, itemData, data);
+    //   if( data.value == 0){
+    //     data.value = data.baseSkill
+    //   }
+    // }
   }
 
   /**

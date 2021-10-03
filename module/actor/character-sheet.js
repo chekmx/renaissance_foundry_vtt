@@ -90,9 +90,13 @@ export class RenaissanceCharacterSheet extends ActorSheet {
       }
       // Append to skills.
       else if (i.type === 'skill') {
-        i.data.baseSkill = getBaseSkill(actorData, i)
+        const item = this.actor.items.get(i._id)
         if(i.data.value == null || i.data.value == 0){
-          i.data.value = i.data.baseSkill;
+          let baseSkill = getBaseSkill(actorData.data, item.data)
+          console.log(actorData)
+          console.log(baseSkill)
+          item.data.value = baseSkill
+          i.data.value = baseSkill
         }
         skills.push(i);
       }
@@ -109,7 +113,6 @@ export class RenaissanceCharacterSheet extends ActorSheet {
     actorData.skills = skills;
     actorData.spells = spells;
 
-    console.log(actorData);
     let baseMagick =  Math.ceil((actorData.data.data.abilities.int.value + actorData.data.data.abilities.pow.value) / 10);
 
     if(baseMagick > actorData.data.magick || actorData.data.magick == undefined){
@@ -131,8 +134,6 @@ export class RenaissanceCharacterSheet extends ActorSheet {
     actorData.rangedWeapons = actorData.gear.filter( function (e) {
       return e.type === 'ranged weapon'
     });
-
-    console.log(actorData.guns)
 
     if(actorData.currentArmour){
       actorData.combatOrder = actorData.data.data.abilities.dex.value - actorData.currentArmour.data.points;
@@ -267,10 +268,8 @@ export class RenaissanceCharacterSheet extends ActorSheet {
   async _updateObject(event, formData){
     if(event.currentTarget){
       if(event.currentTarget.classList.contains('input-skill-edit')){
-        //console.log(event.currentTarget.closest('.item').dataset)
         const item = this.actor.items.get(event.currentTarget.closest('.item').dataset.itemId)
-        //console.log(event.currentTarget.value)
-        item.update({'data.value': event.currentTarget.value})
+        await item.update({'data.value': event.currentTarget.value})
       }
     }
 

@@ -191,28 +191,28 @@ export class RenaissanceCreatureSheet extends ActorSheet {
         //console.log(event.currentTarget.closest('.item').dataset)
         const item = this.actor.items.get(event.currentTarget.closest('.item').dataset.itemId)
         //console.log(event.currentTarget.value)
-        item.update({'data.value': event.currentTarget.value})
+        await item.update({'data.value': event.currentTarget.value})
       }
 
       if(event.currentTarget.classList.contains('input-weapon-name')){
         //console.log(event.currentTarget.closest('.item').dataset)
         const item = this.actor.items.get(event.currentTarget.closest('.item').dataset.itemId)
         console.log(event.currentTarget.value)
-        item.update({'name': event.currentTarget.value})
+        await item.update({'name': event.currentTarget.value})
       }
 
       if(event.currentTarget.classList.contains('input-weapon-skill')){
         //console.log(event.currentTarget.closest('.item').dataset)
         const item = this.actor.items.get(event.currentTarget.closest('.item').dataset.itemId)
         console.log(event.currentTarget.value)
-        item.update({'data.skill': event.currentTarget.value})
+        await item.update({'data.skill': event.currentTarget.value})
       }
 
       if(event.currentTarget.classList.contains('input-weapon-damage')){
         //console.log(event.currentTarget.closest('.item').dataset)
         const item = this.actor.items.get(event.currentTarget.closest('.item').dataset.itemId)
         console.log(event.currentTarget.value)
-        item.update({'data.damage': event.currentTarget.value})
+        await item.update({'data.damage': event.currentTarget.value})
       }
     }
 
