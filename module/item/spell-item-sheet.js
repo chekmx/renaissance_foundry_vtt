@@ -19,7 +19,13 @@ export class RenaissanceSpellItemSheet extends ItemSheet {
 
   /** @override */
   getData() {
-    const data = super.getData();
+    const baseData = super.getData();
+    let sheetData={
+      owner: this.item.isOwner,
+      editable: this.isEditable,
+      item: baseData.item,
+      data: baseData.item.data.data
+    }
     let spellSkills = { 
       "Elemental Casting (Air)" : "Elemental Casting (Air)",
       "Elemental Casting (Earth)" : "Elemental Casting (Earth)",
@@ -34,9 +40,9 @@ export class RenaissanceSpellItemSheet extends ItemSheet {
       "Resilience" : "Resilience",
     }
 
-    data.resistances = resistances
-    data.spellSkills = spellSkills
-    return data;
+    sheetData.resistances = resistances
+    sheetData.spellSkills = spellSkills
+    return sheetData;
   }
 
   /* -------------------------------------------- */

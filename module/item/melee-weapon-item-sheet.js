@@ -2,27 +2,17 @@
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
  */
-export class RenaissanceItemSheet extends ItemSheet {
+export class RenaissanceWeaponItemSheet extends ItemSheet {
 
   /** @override */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      classes: ["renaissance", "sheet", "item"],
-      width: 520,
-      height: 480,
-      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
+      classes: ["renaissance", "sheet", "weapon"],
+      width: 620,
+      height: 580,
+      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }],
+      template:  "systems/renaissance/templates/item/item-melee-weapon-sheet.html"
     });
-  }
-
-  /** @override */
-  get template() {
-    const path = "systems/renaissance/templates/item";
-    // Return a single sheet for all item types.
-    // return `${path}/item-sheet.html`;
-
-    // Alternatively, you could use the following return statement to do a
-    // unique item sheet by type, like `weapon-sheet.html`.
-    return `${path}/item-${this.item.data.type}-sheet.html`;
   }
 
   /* -------------------------------------------- */
@@ -36,6 +26,13 @@ export class RenaissanceItemSheet extends ItemSheet {
       item: baseData.item,
       data: baseData.item.data.data
     }
+    let combatSkills = { 
+      "Close Combat" : "Close Combat",
+      "Close Combat (Polearms)" : "Close Combat (Polearms)",
+      "Unarmed Combat" : "Unarmed Combat" };
+    let combatSizes = { "S" : "S", "M" : "M", "L" : "L", "H" : "H" }
+    sheetData.combatSkills = combatSkills;
+    sheetData.combatSizes = combatSizes;
     return sheetData;
   }
 

@@ -2,7 +2,7 @@
   "name": "renaissance",
   "title": "Renaissance",
   "description": "The Renaissance d100 system for FoundryVTT!",
-  "version": "0.3.0",
+  "version": "0.5.0",
   "minimumCoreVersion": "0.7.5",
   "compatibleCoreVersion": "0.7.9",
   "templateVersion": 2,
@@ -85,7 +85,7 @@
   "primaryTokenAttribute": "health",
   "secondaryTokenAttribute": "power",
   "url": "https://github.com/chekmx/renaissance_foundry_vtt",
-  "manifest": "https://raw.githubusercontent.com/chekmx/renaissance_foundry_vtt/master/system.json",
-  "download": "https://github.com/chekmx/renaissance_foundry_vtt/raw/master/renaissance.zip",
+  "manifest": "https://gitlab.com/stephen.john.richards/renaissance_foundry_vtt/-/raw/0.5.0/system.json",
+  "download": "https://gitlab.com/stephen.john.richards/renaissance_foundry_vtt/-/archive/0.5.0/renaissance-0.5.0.zip",
   "license": "LICENSE.txt"
 }

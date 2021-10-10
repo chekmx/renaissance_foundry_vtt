@@ -2,7 +2,6 @@ import { D100Roll } from "./D100Roll.js";
 
 export async function rollSkill(actor, item, token) {
 
-    const itemData = item.data;
     const actorData = actor ? actor.data.data : {};
 
     let roll = new Roll('1d100', actorData);
@@ -11,8 +10,8 @@ export async function rollSkill(actor, item, token) {
     let successDisplay = D100Roll(roll, item.data.value);
 
     let chatData = {
-      type: CHAT_MESSAGE_TYPES.ROLL,
-      user: game.user._id,
+      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+      user: game.user.id,
       speaker: ChatMessage.getSpeaker({ actor: actor }),
       roll: roll,
       rollMode: game.settings.get("core", "rollMode")

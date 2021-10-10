@@ -13,8 +13,8 @@ export async function rollSpell(actor, item, token) {
     let successDisplay = D100Roll(roll, skill.data.data.value);
 
     let chatData = {
-      type: CHAT_MESSAGE_TYPES.ROLL,
-      user: game.user._id,
+      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+      user: game.user.id,
       speaker: ChatMessage.getSpeaker({ actor: actor }),
       roll: roll,
       rollMode: game.settings.get("core", "rollMode")

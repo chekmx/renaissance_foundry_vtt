@@ -42,7 +42,7 @@ export class RenaissanceActor extends Actor {
   }
 
   async setTurnOrder(order){
-    this.update({"data.combatOrder" : order});
+    await this.update({"data.combatOrder" : order});
   }
 }
 

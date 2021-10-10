@@ -1,0 +1,128 @@
+<div class="tab main" data-group="primary" data-tab="main">
+    <div class="stuff flexrow flex-left">
+      <div class="stuff flex-between">
+        <label class="resource-label flex-left">Nationality:</label>
+        <label class="flex-left">{{data.nationality}}</label>
+      </div>
+      <div class="stuff flex-between">
+        <label class="resource-label">Homeland:</label>
+        <label>{{data.homeland}}</label>
+      </div>
+      <div class="stuff flex-right">
+        <label class="resource-label">Age:</label>
+        <label>{{data.age}}</label>
+      </div>
+    </div> 
+    <div class="stuff flexrow flex-left">
+      <div class="stuff flex-between">
+        <label class="resource-label">Gender: </label>
+        <label>{{data.gender}}</label>
+      </div>
+      <div class="stuff flexrow flex-left">
+        <label class="resource-label">Hero Points: </label>
+        <input class="flex-left" type="text" name="data.heropoints" value="{{data.heropoints}}" data-dtype="String"/>
+      </div>
+    </div>
+    <div class="stuff flexrow flex-left">
+      <div class="stuff flex-between">
+        <label class="resource-label flex-left">Social Class:</label>
+        <label class="flex-left">{{data.social}}</label>
+      </div>
+      <div class="stuff flex-between">
+        <label class="resource-label">Profession:</label>
+        <label>{{data.profession}}</label>
+      </div>
+    </div> 
+    <div class="stuff flexrow flex-left">
+      <div class="stuff flex-between">
+        <label class="resource-label flex-left">Religion:</label>
+        <label class="flex-left">{{data.religion}}</label>
+      </div>
+      <div class="stuff flex-between">
+        <label class="resource-label">Faction:</label>
+        <label>{{data.faction}}</label>
+      </div>
+      <div class="stuff flex-between">
+        <label class="resource-label">RPs:</label>
+        <label>{{data.righteousnessPoints}}</label>
+      </div>
+    </div> 
+    <div class="stuff flexrow flex-left">
+      {{#each data.abilities as |ability key|}}
+        <label class="resource-label flex-left">{{ability.fullname}}:</label>
+        <label class="resource-value flex-center">{{ability.value}}</label>
+      {{/each}}
+      <label class="resource-label flex-left">Magick:</label>
+      <label class="resource-value flex-center">{{data.magick}}</label>
+    </div>
+    <div class="stuff flexrow flex-left">
+      <div class="stuff flex-between">
+        <div class="stuff flexrow flex-left">
+          <label class="resource-label flex-left">HP:</label>
+          <input class="flex-left" type="text" name="data.health.value" value="{{data.health.value}}" data-dtype="String"/>
+          <label class="flex-left" title="Major Wound Level"> / {{data.health.max}}</label>
+          <label class="resource-label">Mwl:</label>
+          <label>{{data.majorWoundLevel}}</label>
+        </div>
+      </div>
+      <div class="stuff flex-between">
+        <label class="resource-label">Damage Modifier:</label>
+        <label>{{data.damageModifier}}</label>
+      </div>
+      <div class="stuff flex-between">
+        <label class="resource-label">Move:</label>
+        <label>{{data.movementRate}}</label>
+      </div>
+    </div> 
+    <div class="stuff flexrow flex-left">
+      <div class="stuff flex-between">
+        <select class="order resource-label" name="data.orderType" data-type="Number">
+          {{selectOptions orderTypes selected=data.orderType}}
+        </select>
+        <label class="order resource-label" >Order:</label>
+        <label>{{data.combatOrder}}</label>
+      </div>
+      <div class="stuff flex-between">
+        <label  class="armour resource-label" >AP:</label>
+        <label>{{actor.currentArmour.data.points}} / {{actor.currentArmour.data.gunPoints}}</label>
+      </div>
+    </div> 
+    <div>
+      <b class="skill resource-label">Skills:  </b> 
+      {{#each actor.skills as |skill id|}}
+        <span class="item rollable" data-roll="d100+{{@data.value}}" data-label="{{@skill.name}}" data-item-id="{{skill._id}}" >{{skill.name}} {{skill.data.value}}%;  </span>
+      {{/each}}
+    </div>
+    <div class="stuff flex-between">
+      <label  class="armour resource-label" >Armour:</label>
+      <label>{{actor.currentArmour.name}}</label>
+      <label>({{actor.currentArmour.data.points}} / {{actor.currentArmour.data.gunPoints}})</label>
+    </div>
+    <div>
+      <b class="skill resource-label">Weapons:  </b><br>
+      {{#each actor.weapons as |item id|}}
+        <span class="item rollable" data-roll="d100+{{@data.skill}}" data-label="{{@item.name}}" data-item-id="{{item._id}}" >{{item.name}} (Size: {{data.size}}, Damage:{{data.damage}});</span>
+        <br>
+      {{/each}}
+      {{#each actor.guns as |item id|}}
+        <span>{{item.name}} (Size: {{data.size}}, </span>
+        <span class="item rollable" data-roll="d100+{{@data.skill}}" data-label="{{@item.name}}" data-item-id="{{item._id}}" >Damage:{{data.damage}}, </span>
+        <span class="item rollable-as-club" data-roll="d100+{{@data.skill}}" data-label="{{@item.name}}-as-club" data-item-id="{{item._id}}" >Club Damage:{{data.clubDamage}}, </span>
+        <span>Range: {{data.range}}, Loading: {{data.load}})</span>
+        <br>
+      {{/each}}
+      {{#each actor.rangedWeapons as |item id|}}
+        <span class="item rollable" data-roll="d100+{{@data.skill}}" data-label="{{@item.name}}" data-item-id="{{item._id}}" >{{item.name}} (Damage:{{data.damage}} Range: {{data.range}} Loading: {{data.load}})</span>
+        <br>      
+      {{/each}}
+    </div>
+    <div>
+      <b class="skill resource-label">Equipment:  </b>
+      {{#each actor.gear as |item id|}}
+        <span data-item-id="{{item._id}}" >{{item.name}};</span>
+      {{/each}}
+    </div>
+    <div>
+      {{{data.biography}}}
+    </div>
+  </div>

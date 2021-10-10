@@ -11,7 +11,7 @@ export class RenaissanceCharacterSheet extends ActorSheet {
       classes: ["renaissance", "sheet", "actor", "character"],
       width: 1200,
       height: 1000,
-      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
+      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "main" }]
     });
   }
 
@@ -30,17 +30,26 @@ export class RenaissanceCharacterSheet extends ActorSheet {
 
   /** @override */
   getData() {
-    const data = super.getData();
-    data.dtypes = ["String", "Number", "Boolean"];
+    const baseData = super.getData();
+    let sheetData={
+      owner: this.actor.isOwner,
+      editable: this.isEditable,
+      actor: baseData.actor,
+      items: baseData.items,
+      data: baseData.actor.data.data
+    }
+    sheetData.dtypes = ["String", "Number", "Boolean"];
 
     // Prepare items.
     if (this.actor.data.type == 'character') {
-      for (let attr of Object.values(data.data.attributes)) {
+      for (let attr of Object.values(sheetData.data.attributes)) {
         attr.isCheckbox = attr.dtype === "Boolean";
       }
     }
-    this._prepareCharacterItems(data);
-    return data;
+    let orderTypes = { 0: "Combat", 1: "Spell" }
+    sheetData.orderTypes = orderTypes
+    this._prepareCharacterItems(sheetData);
+    return sheetData;
   }
 
   /**
@@ -76,14 +85,18 @@ export class RenaissanceCharacterSheet extends ActorSheet {
       //let item = i.data;
       i.img = i.img || DEFAULT_TOKEN;
       // Append to gear.
-      if (i.type === 'item'  || i.type === 'armour'  || i.type === 'weapon') {
+      if (i.type === 'item'  || i.type === 'armour'  || i.type === 'melee weapon' || i.type === 'gun' || i.type === 'ranged weapon') {
         gear.push(i);
       }
       // Append to skills.
       else if (i.type === 'skill') {
-        i.data.baseSkill = getBaseSkill(actorData, i)
+        const item = this.actor.items.get(i._id)
         if(i.data.value == null || i.data.value == 0){
-          i.data.value = i.data.baseSkill;
+          let baseSkill = getBaseSkill(actorData.data, item.data)
+          console.log(actorData)
+          console.log(baseSkill)
+          item.data.value = baseSkill
+          i.data.value = baseSkill
         }
         skills.push(i);
       }
@@ -100,7 +113,7 @@ export class RenaissanceCharacterSheet extends ActorSheet {
     actorData.skills = skills;
     actorData.spells = spells;
 
-    let baseMagick =  Math.ceil((actorData.data.abilities.int.value + actorData.data.abilities.pow.value) / 10);
+    let baseMagick =  Math.ceil((actorData.data.data.abilities.int.value + actorData.data.data.abilities.pow.value) / 10);
 
     if(baseMagick > actorData.data.magick || actorData.data.magick == undefined){
       actorData.data.magick = baseMagick;
@@ -111,22 +124,30 @@ export class RenaissanceCharacterSheet extends ActorSheet {
     })[0];
 
     actorData.weapons = actorData.gear.filter( function (e) {
-      return e.type === "weapon"
+      return e.type === "melee weapon"
+    });
+
+    actorData.guns = actorData.gear.filter( function (e) {
+      return e.type === 'gun' 
+    });
+
+    actorData.rangedWeapons = actorData.gear.filter( function (e) {
+      return e.type === 'ranged weapon'
     });
 
     if(actorData.currentArmour){
-      actorData.combatOrder = actorData.data.abilities.dex.value - actorData.currentArmour.data.points;
-      actorData.spellOrder = actorData.data.abilities.int.value - actorData.currentArmour.data.points;
+      actorData.combatOrder = actorData.data.data.abilities.dex.value - actorData.currentArmour.data.points;
+      actorData.spellOrder = actorData.data.data.abilities.int.value - actorData.currentArmour.data.points;
     } else {
-      actorData.combatOrder = actorData.data.abilities.dex.value;
-      actorData.spellOrder = actorData.data.abilities.int.value ;
+      actorData.combatOrder = actorData.data.data.abilities.dex.value;
+      actorData.spellOrder = actorData.data.data.abilities.int.value ;
     }
-    if(actorData.data.orderType == "0") {
-      //console.log(`use combat order ${actorData.combatOrder}`);
+    if(actorData.data.data.orderType == "0") {
+      console.log(`use combat order ${actorData.combatOrder}`);
       actorData.data.combatOrder = actorData.combatOrder;
       
     } else {
-      //console.log(`use spell order ${actorData.spellOrder}`);
+      console.log(`use spell order ${actorData.spellOrder}`);
       actorData.data.combatOrder = actorData.spellOrder;    
     }
     this.actor.setTurnOrder(actorData.data.combatOrder);
@@ -147,32 +168,33 @@ export class RenaissanceCharacterSheet extends ActorSheet {
     // Update Inventory Item
     html.find('.item-edit').click(ev => {
       const li = $(ev.currentTarget).parents(".item");
-      const item = this.actor.getOwnedItem(li.data("itemId"));
+      const item = this.actor.items.get(li.data("itemId"));
       item.sheet.render(true);
     });
 
     // html.find('.item-update').change( ev =>{
     //   const li = $(ev.currentTarget).parents(".item");
     //   console.log(li);
-    //   const item = this.actor.getOwnedItem(li.data("itemId"));
+    //   const item = this.actor.items.get(li.data("itemId"));
     // });
 
     // Delete Inventory Item
     html.find('.item-delete').click(ev => {
       const li = $(ev.currentTarget).parents(".item");
-      this.actor.deleteOwnedItem(li.data("itemId"));
+      this.actor.deleteEmbeddedDocuments("Item", [li.data("itemId")]);
       li.slideUp(200, () => this.render(false));
     });
 
     // Rollable abilities.
     html.find('.rollable').click(this._onRoll.bind(this));
 
+    html.find('.rollable-as-club').click(this._onRollAsClub.bind(this));
     // TO DO confirm if this is used  
     // combat-type selector 
     html.find('.order-selector').click(this._onOrderSelector.bind(this));
 
     // Drag events for macros.
-    if (this.actor.owner) {
+    if (this.actor.isOwner) {
       let handler = ev => this._onDragStart(ev);
       html.find('li.item').each((i, li) => {
         if (li.classList.contains("inventory-header")) return;
@@ -206,7 +228,14 @@ export class RenaissanceCharacterSheet extends ActorSheet {
     delete itemData.data["type"];
 
     // Finally, create the item!
-    return this.actor.createOwnedItem(itemData);
+    return this.actor.createEmbeddedDocuments("Item", [itemData]);
+  }
+
+  _onRollAsClub(event) {
+    event.preventDefault();
+    const itemId = event.currentTarget.closest(".item").dataset.itemId;
+    const item = this.actor.items.get(itemId);
+    return item.roll(true);
   }
 
   /**
@@ -218,7 +247,7 @@ export class RenaissanceCharacterSheet extends ActorSheet {
 
     event.preventDefault();
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
-    const item = this.actor.getOwnedItem(itemId);
+    const item = this.actor.items.get(itemId);
     return item.roll();
   }
 
@@ -239,10 +268,8 @@ export class RenaissanceCharacterSheet extends ActorSheet {
   async _updateObject(event, formData){
     if(event.currentTarget){
       if(event.currentTarget.classList.contains('input-skill-edit')){
-        //console.log(event.currentTarget.closest('.item').dataset)
-        const item = this.actor.getOwnedItem(event.currentTarget.closest('.item').dataset.itemId)
-        //console.log(event.currentTarget.value)
-        item.update({'data.value': event.currentTarget.value})
+        const item = this.actor.items.get(event.currentTarget.closest('.item').dataset.itemId)
+        await item.update({'data.value': event.currentTarget.value})
       }
     }
 

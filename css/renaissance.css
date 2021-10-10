@@ -12,6 +12,12 @@
   cursor: pointer;
 }
 
+.rollable-as-club:hover, .rollable:focus {
+  color: #000;
+  text-shadow: 0 0 10px red;
+  cursor: pointer;
+}
+
 .grid,
 .grid-2col {
   display: grid;
@@ -86,14 +92,14 @@
   border: 1px solid #999;
 }
 
-.flex-group-left {
+.flex-left {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
-  justify-content: flex-start;
+  justify-content: left;
   text-align: left;
 }
 
-.flex-group-right {
+.flex-right {
   -webkit-box-pack: end;
   -ms-flex-pack: end;
   justify-content: flex-end;
@@ -123,8 +129,8 @@
 
 .renaissance .sheet-header {
   -webkit-box-flex: 0;
-  -ms-flex: 0 0 415px;
-  flex: 0 0 415px;
+  -ms-flex: 0 0 215px;
+  flex: 0 0 215px;
   overflow: hidden;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -242,6 +248,12 @@
 .renaissance .resource-label {
   font-family: "Meddon", cursive;
   font-weight: bold;
+  text-transform: capitalize;
+}
+
+.renaissance .resource-value {
+  font-family: "IM Fell DW Pica", serif;
+  font-size: large;
   text-transform: capitalize;
 }
 

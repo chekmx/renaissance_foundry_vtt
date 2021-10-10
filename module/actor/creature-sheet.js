@@ -30,19 +30,26 @@ export class RenaissanceCreatureSheet extends ActorSheet {
 
   /** @override */
   getData() {
-    const data = super.getData();
-    data.dtypes = ["String", "Number", "Boolean"];
+    const baseData = super.getData();
+    let sheetData={
+      owner: this.actor.isOwner,
+      editable: this.isEditable,
+      actor: baseData.actor,
+      items: baseData.items,
+      data: baseData.actor.data.data
+    }
+    sheetData.dtypes = ["String", "Number", "Boolean"];
 
     //console.log(data)
     
     // Prepare items.
     if (this.actor.data.type == 'character') {
-      for (let attr of Object.values(data.data.attributes)) {
+      for (let attr of Object.values(sheetData.data.attributes)) {
         attr.isCheckbox = attr.dtype === "Boolean";
       }
     }
-    this._prepareCharacterItems(data);
-    return data;
+    this._prepareCharacterItems(sheetData);
+    return sheetData;
   }
 
   /**
@@ -76,7 +83,7 @@ export class RenaissanceCreatureSheet extends ActorSheet {
       let item = i.data;
       i.img = i.img || DEFAULT_TOKEN;
       // Append to gear.
-      if (i.type === 'item'  || i.type === 'armour'  || i.type === 'weapon') {
+      if (i.type === 'item'  || i.type === 'armour'  || i.type === 'melee weapon') {
         gear.push(i);
       }
       // Append to skills.
@@ -84,18 +91,18 @@ export class RenaissanceCreatureSheet extends ActorSheet {
         skills.push(i);
       }
     }
-    actorData.data.armour.gunpoints = Math.floor(actorData.data.armour.points / 2);
+    actorData.data.data.armour.gunpoints = Math.floor(actorData.data.data.armour.points / 2);
     // Assign and return
     actorData.gear = gear;
     actorData.skills = skills;
     actorData.spells = spells;
 
     actorData.weapons = actorData.gear.filter( function (e) {
-      return e.type === "weapon"
+      return e.type === "melee weapon"
     });
 
-    actorData.data.combatOrder = actorData.data.abilities.dex.value;
-    this.actor.setTurnOrder(actorData.data.abilities.dex.value);
+    actorData.data.combatOrder = actorData.data.data.abilities.dex.value;
+    this.actor.setTurnOrder(actorData.data.data.abilities.dex.value);
   }
 
   /* -------------------------------------------- */
@@ -113,14 +120,14 @@ export class RenaissanceCreatureSheet extends ActorSheet {
     // Update Inventory Item
     html.find('.item-edit').click(ev => {
       const li = $(ev.currentTarget).parents(".item");
-      const item = this.actor.getOwnedItem(li.data("itemId"));
+      const item = this.actor.items.get(li.data("itemId"));
       item.sheet.render(true);
     });
 
     // Delete Inventory Item
     html.find('.item-delete').click(ev => {
       const li = $(ev.currentTarget).parents(".item");
-      this.actor.deleteOwnedItem(li.data("itemId"));
+      this.actor.deleteEmbeddedDocuments("Item", [li.data("itemId")]);
       li.slideUp(200, () => this.render(false));
     });
 
@@ -128,7 +135,7 @@ export class RenaissanceCreatureSheet extends ActorSheet {
     html.find('.rollable').click(this._onRoll.bind(this));
 
     // Drag events for macros.
-    if (this.actor.owner) {
+    if (this.actor.isOwner) {
       let handler = ev => this._onDragStart(ev);
       html.find('li.item').each((i, li) => {
         if (li.classList.contains("inventory-header")) return;
@@ -162,7 +169,7 @@ export class RenaissanceCreatureSheet extends ActorSheet {
     delete itemData.data["type"];
     
     // Finally, create the item!
-    return this.actor.createOwnedItem(itemData);
+    return this.actor.createEmbeddedDocuments("Item", [itemData]);
   }
 
   /**
@@ -174,7 +181,7 @@ export class RenaissanceCreatureSheet extends ActorSheet {
 
     event.preventDefault();
     const itemId = event.currentTarget.closest(".item").dataset.itemId;
-    const item = this.actor.getOwnedItem(itemId);
+    const item = this.actor.items.get(itemId);
     return item.roll();
   }
 
@@ -182,30 +189,30 @@ export class RenaissanceCreatureSheet extends ActorSheet {
     if(event.currentTarget){
       if(event.currentTarget.classList.contains('input-skill-edit')){
         //console.log(event.currentTarget.closest('.item').dataset)
-        const item = this.actor.getOwnedItem(event.currentTarget.closest('.item').dataset.itemId)
+        const item = this.actor.items.get(event.currentTarget.closest('.item').dataset.itemId)
         //console.log(event.currentTarget.value)
-        item.update({'data.value': event.currentTarget.value})
+        await item.update({'data.value': event.currentTarget.value})
       }
 
       if(event.currentTarget.classList.contains('input-weapon-name')){
         //console.log(event.currentTarget.closest('.item').dataset)
-        const item = this.actor.getOwnedItem(event.currentTarget.closest('.item').dataset.itemId)
+        const item = this.actor.items.get(event.currentTarget.closest('.item').dataset.itemId)
         console.log(event.currentTarget.value)
-        item.update({'name': event.currentTarget.value})
+        await item.update({'name': event.currentTarget.value})
       }
 
       if(event.currentTarget.classList.contains('input-weapon-skill')){
         //console.log(event.currentTarget.closest('.item').dataset)
-        const item = this.actor.getOwnedItem(event.currentTarget.closest('.item').dataset.itemId)
+        const item = this.actor.items.get(event.currentTarget.closest('.item').dataset.itemId)
         console.log(event.currentTarget.value)
-        item.update({'data.skill': event.currentTarget.value})
+        await item.update({'data.skill': event.currentTarget.value})
       }
 
       if(event.currentTarget.classList.contains('input-weapon-damage')){
         //console.log(event.currentTarget.closest('.item').dataset)
-        const item = this.actor.getOwnedItem(event.currentTarget.closest('.item').dataset.itemId)
+        const item = this.actor.items.get(event.currentTarget.closest('.item').dataset.itemId)
         console.log(event.currentTarget.value)
-        item.update({'data.damage': event.currentTarget.value})
+        await item.update({'data.damage': event.currentTarget.value})
       }
     }
 

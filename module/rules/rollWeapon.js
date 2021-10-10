@@ -1,7 +1,6 @@
 import { D100Roll } from "./D100Roll.js";
 
-export async function rollWeapon(actor, item, token) {
-
+export async function rollWeapon(actor, item, token, asClub) {
     const itemData = item.data;
     const actorData = actor ? actor.data.data : {};
 
@@ -26,10 +25,14 @@ export async function rollWeapon(actor, item, token) {
     let target = ""
     if(skill) {
       successDisplay = D100Roll(roll, skill.data.data.value, modifier)
-      target = skill.data.data.value + modifier
-    } else {
+      target = Number(skill.data.data.value) + Number(modifier)
+    } else if(item.data.skill  && !isNaN(item.data.skill)) {
+      console.log("HERE")
       successDisplay = D100Roll(roll, item.data.skill, modifier)
       target = parseInt(item.data.skill) + parseInt(modifier)
+    } else {
+      ui.notifications.info(`${actor.name} does not have required skill ${itemData.skill}`);
+      return
     }
 
     let isSuccess = (successDisplay != "FAIL" && successDisplay != "FUMBLE")
@@ -37,9 +40,11 @@ export async function rollWeapon(actor, item, token) {
     let damageRoll = {};
     if(isSuccess)
     {
-      if(hasDamageModifier(skill)){
-        damageRoll = new Roll(itemData.damage + actor.data.data.damageModifier, actor.data);
+      if(hasDamageModifier(skill, asClub)){
+        console.log(itemData)
+        damageRoll = new Roll((asClub ? itemData.clubDamage : itemData.damage) + actor.data.data.damageModifier, actor.data);
       } else {
+        console.log(itemData)
         damageRoll = new Roll(itemData.damage, actor.data);
       }
 
@@ -89,7 +94,8 @@ export async function rollWeapon(actor, item, token) {
 
 }
 
-function hasDamageModifier(skill) {
+function hasDamageModifier(skill, asClub) {
   if(!skill) return true
-  return skill.name != "Gun Combat" && skill.name != "Ranged Combat" && skill.name != "Ranged Combat(Bows)";
+  if(asClub) return true
+  return skill.name != "Gun Combat" && skill.name != "Ranged Combat" && skill.name != "Ranged Combat (Bow)";
 }

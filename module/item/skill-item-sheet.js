@@ -1,4 +1,4 @@
-import { getBaseSkill } from '../rules/getBaseSkill.js'
+//import { getBaseSkill } from '../rules/getBaseSkill.js'
 /**
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
@@ -20,13 +20,19 @@ export class RenaissanceSkillItemSheet extends ItemSheet {
 
   /** @override */
   getData() {
-    const data = super.getData();
-    let abilities = { Str : "Strength", Con : "Constitution", Siz : "Size", Int: "Intelligence", Pow :"Power", Dex :"Dexterity", Cha :"Charisma"};
-    data.abilities = abilities;
-    if(data.data.value == null || data.data.value == 0){
-      data.data.value = data.data.baseSkill
+    const baseData = super.getData();
+    let sheetData={
+      owner: this.item.isOwner,
+      editable: this.isEditable,
+      item: baseData.item,
+      data: baseData.item.data.data
     }
-    return data;
+    let abilities = { Str : "Strength", Con : "Constitution", Siz : "Size", Int: "Intelligence", Pow :"Power", Dex :"Dexterity", Cha :"Charisma"};
+    sheetData.abilities = abilities;
+    if(sheetData.data.value == null || sheetData.data.value == 0){
+      sheetData.data.value = sheetData.data.baseSkill
+    }
+    return sheetData;
   }
 
   /* -------------------------------------------- */
